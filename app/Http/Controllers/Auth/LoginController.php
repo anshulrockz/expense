@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use Login;
+use LoginLog;
 
 class LoginController extends Controller
 {
@@ -16,6 +17,15 @@ class LoginController extends Controller
      *
      * @var string
      */
+
+    $login_log = new LoginLog;
+    $login_log->created_by = Auth::id();
+    $login_log->updated_by = Auth::id();
+    $login_log->user_sys = \Request::ip();
+    $login_log->created_at = date('Y-m-d H:i:s');;
+    $login_log->updated_at = date('Y-m-d H:i:s');;
+    $result = $login_log->save();
+
     protected $redirectTo = '/dashboard';
 
     /**

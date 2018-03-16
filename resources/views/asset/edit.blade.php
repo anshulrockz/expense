@@ -64,18 +64,10 @@ $( document ).ready(function() {
     if ($("#asset_category").val() == 2)
 	{
 		$('.vehicle').show();
-		$("#registration").removeAttr('disabled','disabled');	
-		$("#vehicle_make").removeAttr('disabled','disabled');	
-		$("#puc").removeAttr('disabled','disabled');	
-		$("#insurance").removeAttr('disabled','disabled');	
 	}
 	else
 	{
 		$('.vehicle').hide();
-		$("#registration").attr('disabled','disabled');	
-		$("#vehicle_make").attr('disabled','disabled');	
-		$("#puc").attr('disabled','disabled');	
-		$("#insurance").attr('disabled','disabled');
 	}
 });
 
@@ -88,10 +80,6 @@ $(function() {
     });
 });
 
-$(document).ready(function() {
-	
-	
-});
 </script>
 
 <div class="row clearfix">

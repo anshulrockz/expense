@@ -10,6 +10,23 @@
 
 <!-- AJAX DD Selecter for Location Js -->
 <script>
+
+$( document ).ready(function() {
+    $("#form input").prop("disabled", true);
+    $("#form select").prop("disabled", true);
+    $("#form textarea").prop("disabled", true);
+    $("#form-save").prop("disabled", true);
+});
+
+$(function() {
+    $("#form-edit").click(function() {
+     	$("#form input").prop("disabled", false);
+     	$("#form select").prop("disabled", false);
+    	$("#form textarea").prop("disabled", false);
+    	$("#form-save").prop("disabled", false);
+    });
+});
+
 $(function(){
 	$("#company").change(function(){
 		var id = $(this).val();
@@ -157,7 +174,7 @@ function paymentMode(mode){
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{route('deposits.update',$deposit->id)}}">
+                <form id="form" method="post" action="{{route('deposits.update',$deposit->id)}}">
                 	{{ csrf_field() }}
 	                {{ method_field('PUT') }}
 	                
@@ -264,11 +281,12 @@ function paymentMode(mode){
 	                    </div>
 	                </div>
 	                
-                    <div class="row clearfix">
+                   <div class="row clearfix">
 	                	<div class="col-sm-6">
-                    		<button type="submit" class="btn btn-primary m-t-15 waves-effect">Save</button>
-                    	</div>
-                    </div>
+	                		<button type="submit" id="form-save" class="btn btn-primary waves-effect">Save</button>
+	                		<button type="button" id="form-edit" class="btn btn-primary waves-effect">Edit</button>
+	                	</div>
+	                </div>
                 </form>
             </div>
         </div>

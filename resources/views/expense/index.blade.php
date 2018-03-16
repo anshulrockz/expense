@@ -32,9 +32,9 @@
                 <h2>
                     All
                 </h2>
-                <!-- if(Auth::user()->user_type!=1) -->
+                @if(Auth::user()->user_type!=1)
                 <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('/expenses/create')}}">Add New</a>
-                <!-- endif -->
+                @endif
             </div>
             <div class="body">
                 <div class="">

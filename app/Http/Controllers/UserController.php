@@ -95,7 +95,7 @@ class UserController extends Controller
 		$user->designation = $request->designation;
 		$user->address = $request->address;
 		$user->status = 1;
-		$user->user_sys = 1;
+		$user->user_sys = \Request::ip();
 		$user->updated_by = Auth::id();
 		$user->created_by = Auth::id();
 		$result = $user->save();
@@ -156,7 +156,7 @@ class UserController extends Controller
 		$user->designation_id = $request->designation;
 		$user->address = $request->address;
 		$user->status = 1;
-		$user->user_sys = 1;
+		$user->user_sys = \Request::ip();
 		$user->updated_by = Auth::id();
 		$result = $user->save();
 		

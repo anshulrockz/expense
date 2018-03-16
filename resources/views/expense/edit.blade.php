@@ -13,6 +13,24 @@
 
 <!-- AJAX DD Selecter for Location Js -->
 <script>
+
+$( document ).ready(function() {
+    $("#form input").prop("disabled", true);
+    $("#form select").prop("disabled", true);
+    $("#form textarea").prop("disabled", true);
+    $("#form-save").prop("disabled", true);
+});
+
+$(function() {
+    $("#form-edit").click(function() {
+     	$("#form input").prop("disabled", false);
+     	$("#form select").prop("disabled", false);
+    	$("#form textarea").prop("disabled", false);
+    	$("#form-save").prop("disabled", false);
+    });
+});
+
+
 $(function(){
 
 	$("#expense_category").change(function(){
@@ -217,12 +235,12 @@ $(document).ready(function() {
 	                @if($balance)
 	                Balance({{$balance}})
 	                @else
-	                Bal- 0
+	                Balance 0
 	                @endif
                 </b>
             </div>
             <div class="body">
-                <form method="post" action="{{route('expenses.update',$expense->id)}}" enctype="multipart/form-data">
+                <form id="form" method="post" action="{{route('expenses.update',$expense->id)}}" enctype="multipart/form-data">
                 	{{ csrf_field() }}
 	                {{ method_field('PUT') }}
                 	 <div class="row clearfix">
@@ -238,7 +256,7 @@ $(document).ready(function() {
 		                    <label for="voucher_date">Voucher Date</label>
 		                    <div class="form-group form-float">
 		                        <div class="form-line ">
-		                            <input type="text" id="voucher_date" name="voucher_date" class="form-control datepicker" placeholder="Enter Date Of voucher" value="{{  date('d F Y') }}" disabled>
+		                            <input type="text" id="voucher_date" name="voucher_date" class="form-control datepicker" placeholder="Enter Date Of voucher" value="{{  date_format(date_create($expense->created_at),'d F y') }}" disabled>
 		                        </div>
 		                    </div>
 	                    </div>
@@ -254,7 +272,7 @@ $(document).ready(function() {
 		                    <label for="invoice_date">Invoice Date</label>
 		                    <div class="form-group form-float">
 		                        <div class="form-line ">
-		                            <input type="text" id="invoice_date" name="invoice_date" class="form-control datepicker" placeholder="Enter Date Of Invoice" value="{{ $expense->invoice_date }}" >
+		                            <input type="text" id="invoice_date" name="invoice_date" class="form-control datepicker" placeholder="Enter Date Of Invoice" value="{{  date_format(date_create($expense->invoice_date),'d F y') }}" >
 		                        </div>
 		                    </div>
 	                    </div>
@@ -459,7 +477,8 @@ $(document).ready(function() {
 	                </div>
 	                <div class="row clearfix">
 	                	<div class="col-sm-6">
-	                		<button type="submit" class="btn btn-primary m-t-15 waves-effect">Save</button>
+	                		<button type="submit" id="form-save" class="btn btn-primary waves-effect">Save</button>
+	                		<button type="button" id="form-edit" class="btn btn-primary waves-effect">Edit</button>
 	                	</div>
 	                </div>
                 </form>

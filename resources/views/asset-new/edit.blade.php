@@ -56,7 +56,8 @@ $(function(){
 });
 
 $(document).ready(function() {
-	$('.vehicle').hide();
+	if($('#asset_category').val() == 2) $('.vehicle').show();
+	else $('.vehicle').hide();
 	$('.sub_asset').hide();
 
 	$('.vehicle').on('keyup', '#tax', function(e){
@@ -86,6 +87,22 @@ $(document).ready(function() {
 		$('#total_amount').val(parseFloat(total_amount).toFixed(2));
 		//alert(total_tax);
 	});
+});
+
+$( document ).ready(function() {
+    $("#form input").prop("disabled", true);
+    $("#form select").prop("disabled", true);
+    $("#form textarea").prop("disabled", true);
+    $("#form-save").prop("disabled", true);
+});
+
+$(function() {
+    $("#form-edit").click(function() {
+     	$("#form input").prop("disabled", false);
+     	$("#form select").prop("disabled", false);
+    	$("#form textarea").prop("disabled", false);
+    	$("#form-save").prop("disabled", false);
+    });
 });
 
 </script>
@@ -125,7 +142,7 @@ $(document).ready(function() {
                 
             </div>
             <div class="body">
-                <form method="post" action="{{route('new.update',$asset->id)}}" enctype="multipart/form-data">
+                <form id="form" method="post" action="{{route('new.update',$asset->id)}}" enctype="multipart/form-data">
                 	{{ csrf_field() }}
 	                {{ method_field('PUT') }}
                 	 <div class="row clearfix">
@@ -357,7 +374,8 @@ $(document).ready(function() {
 	                </div>
 	                <div class="row clearfix">
 	                	<div class="col-sm-6">
-	                		<button type="submit" class="btn btn-primary m-t-15 waves-effect">Save</button>
+	                		<button type="submit" id="form-save" class="btn btn-primary waves-effect">Save</button>
+	                		<button type="button" id="form-edit" class="btn btn-primary waves-effect">Edit</button>
 	                	</div>
 	                </div>
                 </form>
