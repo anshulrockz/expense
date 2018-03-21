@@ -40,4 +40,13 @@ class AssetNew extends Model
 	{
 		return DB::table('assets')->orderBy('id', 'desc')->first();
 	}
+
+	public static function assetnew_pie_chart()
+	{
+		return DB::table('asset_news')
+				->select( "main_category", "sub_category", DB::raw('SUM(amount) as total') )
+				->groupBy('main_category', 'sub_category')
+				->where('deleted_at',null)
+				->get();
+	}
 }

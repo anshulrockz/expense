@@ -53,7 +53,7 @@
                                 <th>User Id</th>
                                 <th>Mobile</th>
                                 <th>Designation</th>
-                                <th>Status</th>
+                                <th>Last Login</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -77,8 +77,8 @@
                                 <td>{{$list->mobile}}</td>
                                 <td>{{$list->designation}}</td>
                                 <td>
-                                	@if($list->status==1){{"Active"}}
-                                	@else {{"Inactive"}}
+                                	@if($list->last_login_at == null) New User
+                                	@else {{ date_format(date_create($list->last_login_at),'d-m-y H:i')}}
                                 	@endif
                                 </td>
                                 <td>

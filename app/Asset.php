@@ -40,4 +40,12 @@ class Asset extends Model
 	{
 		return DB::table('assets')->orderBy('id', 'desc')->first();
 	}
+
+	public static function asset_detail()
+	{
+		return DB::table('assets')
+				->select( "main_category", "sub_category", DB::raw('SUM(amount) as total') )
+				->groupBy('main_category', 'sub_category')
+				->get();
+	}
 }

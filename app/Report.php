@@ -105,6 +105,52 @@ class Report extends Model
 	            ->get();
 		}
 	}
+
+	public static function all_asset_news()
+	{
+		$company = Auth::user()->company_id;
+		$workshop = Auth::user()->workshop_id;
+		$user_id = Auth::user()->id;
+		
+		if(Auth::user()->user_type == 1)
+		{
+			return DB::table('asset_news')
+				->select('asset_news.*', 'users.name as user')
+				->where([
+				['users.company_id',$company],
+				['asset_news.deleted_at',null]
+				])
+	            ->leftJoin('users', 'users.id', '=', 'asset_news.created_by')
+	            ->get();
+		}
+		
+		if(Auth::user()->user_type == 2)
+		{
+			return DB::table('asset_news')
+				->select('asset_news.*', 'users.name as user')
+				->where([
+				['users.company_id',$company],
+				['users.workshop_id',$workshop],
+				['asset_news.deleted_at',null]
+				])
+	            ->leftJoin('users', 'users.id', '=', 'asset_news.created_by')
+	            ->get();
+		}
+		
+		if(Auth::user()->user_type == 3)
+		{
+			return DB::table('asset_news')
+				->select('asset_news.*', 'users.name as user')
+				->where([
+				['users.company_id',$company],
+				['users.workshop_id',$workshop],
+				['users.id',$user_id],
+				['asset_news.deleted_at',null]
+				])
+	            ->leftJoin('users', 'users.id', '=', 'asset_news.created_by')
+	            ->get();
+		}
+	}
 	
 	public static function all_assets_expiry()
 	{
@@ -170,33 +216,34 @@ class Report extends Model
 		if(Auth::user()->user_type == 1)
 		{
 			return DB::table('expenses')
-				->select('expenses.*', 'users.name as user')
+				->select('expenses.*', 'expense_details.*', 'users.name as user')
 				->where([
 				['users.company_id',$company],
 				['expenses.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'expenses.created_by')
-	            //->leftJoin('users', 'users.id', '=', 'expenses.created_by')
+	            ->leftJoin('expense_details', 'expense_details.expense_id', '=', 'expenses.id')
 	            ->get();
 		}
 		
 		if(Auth::user()->user_type == 2)
 		{
 			return DB::table('expenses')
-				->select('expenses.*', 'users.name as user')
+				->select('expenses.*', 'expense_details.*', 'users.name as user')
 				->where([
 				['users.company_id',$company],
 				['users.workshop_id',$workshop],
 				['expenses.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'expenses.created_by')
+	            ->leftJoin('expense_details', 'expense_details.expense_id', '=', 'expenses.id')
 	            ->get();
 		}
 		
 		if(Auth::user()->user_type == 3)
 		{
 			return DB::table('expenses')
-				->select('expenses.*', 'users.name as user')
+				->select('expenses.*', 'expense_details.*', 'users.name as user')
 				->where([
 				['users.company_id',$company],
 				['users.workshop_id',$workshop],
@@ -204,6 +251,7 @@ class Report extends Model
 				['expenses.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'expenses.created_by')
+	            ->leftJoin('expense_details', 'expense_details.expense_id', '=', 'expenses.id')
 	            ->get();
 		}
 	}
@@ -254,4 +302,6 @@ class Report extends Model
 	            ->get();
 		}
 	}
+
+	
 }

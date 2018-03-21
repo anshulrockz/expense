@@ -47,4 +47,21 @@ class Deposit extends Model
             ->leftJoin('users', 'users.id', '=', 'deposits.to_user')
             ->get();
 	}
+
+	public static function deposit_bar_chart()
+	{
+		return DB::table('deposits')
+				->select( DB::raw('YEAR(created_at) AS y'), DB::raw('MONTH(created_at) AS m'), DB::raw('SUM(amount) as total') )
+				->where( DB::raw('YEAR(created_at)'), "=","2018")
+				->groupBy('y', 'm')
+				->get();
+	}
+
+	public static function deposit_table()
+	{
+		return DB::table('deposits')
+				->where( DB::raw('YEAR(created_at)'), "=","2018")
+				->groupBy('y', 'm')
+				->get();
+	}
 }

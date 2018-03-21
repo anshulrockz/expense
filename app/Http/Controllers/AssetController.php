@@ -45,7 +45,7 @@ class AssetController extends Controller
 		$asset->main_category = $main_category_name[0];
 		if(!empty($request->sub_asset))
 		{
-			$main_category_name = SubAsset::find($request->asset_category)->pluck('name');
+			$main_category_name = SubAsset::find($request->sub_asset)->pluck('name');
 			$asset->sub_category = $main_category_name[0];
 		}
 		if(!empty($request->file('voucher_img')))

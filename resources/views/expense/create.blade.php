@@ -61,12 +61,12 @@ $(function(){
         	var description = $('#description_main').val();
         	var code = $('#code_main').val();
         	var cost = $('#cost_main').val();
-        	var tax = $('#tax_main').val()/2;
+        	var tax = $('#tax_main').val();
         	
         	if(cost < 1) cost = 0;
         	if ($("#radio_1:checked").val() == '1') {
-                sgst = (cost*tax)/100;
-				cgst = (cost*tax)/100;
+                sgst = (cost*tax)/200;
+				cgst = (cost*tax)/200;
 
 				$('.sgst_tr').show();
 				$('.cgst_tr').show();

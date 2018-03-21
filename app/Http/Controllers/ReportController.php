@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Report;
+use App\AssetNew;
 use App\Expense;
 use App\Deposit;
 use App\Transaction;
@@ -25,7 +26,8 @@ class ReportController extends Controller
 	public function asset()
     {
         $asset = Report::all_assets();
-        return view('report.asset')->with('report', $asset);
+        $assetnew = Report::all_asset_news();
+        return view('report.asset')->with(array('report' => $asset, 'report2' => $assetnew ));
     }
     
     public function expiry()

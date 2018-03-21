@@ -193,9 +193,9 @@ $(function() {
 			                    <div class="form-line">
 			                        <select class="form-control show-tick" id="employee_type" name="employee_type" required>
 			                            <option value="">-- Please select user type --</option>
-			                            <option value="1" @if(auth::user()->user_type==1) selected="selected" @endif >Super Admin</option>
-			                            <option value="3" @if(auth::user()->user_type==3) selected="selected" @endif >Workshop Admin</option>
-			                            <option value="4" @if(auth::user()->user_type==4) selected="selected" @endif >Workshop User</option>
+			                            <option value="1" @if($users->user_type == 1) selected="selected" @endif >Super Admin</option>
+			                            <option value="3" @if($users->user_type == 3) selected="selected" @endif >Workshop Admin</option>
+			                            <option value="4" @if($users->user_type == 4) selected="selected" @endif >Workshop User</option>
 			                            
 			                        </select>
 		                    	</div>

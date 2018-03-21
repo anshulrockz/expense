@@ -45,10 +45,10 @@ class AssetNewController extends Controller
 		
 		$main_category_name = AssetCategory::find($request->asset_category)->pluck('name');
 		$asset_new->main_category = $main_category_name[0];
-
+		
 		if(!empty($request->sub_asset))
 		{
-			$main_category_name = SubAsset::find($request->asset_category)->pluck('name');
+			$main_category_name = SubAsset::find($request->sub_asset)->pluck('name');
 			$asset_new->sub_category = $main_category_name[0];
 		}
 		

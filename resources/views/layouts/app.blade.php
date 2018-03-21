@@ -350,28 +350,44 @@
                         </a>
                         <ul class="ml-menu">
                             <li class="{{ Request::is('companies*') ? 'active' : '' }}" >
-                                <a href="{{ url('/companies') }}">Companies</a>
+                                <a href="{{ url('/companies') }}">
+                                    <span>Companies</span>
+                                </a>
                             </li>
                             <li class="{{ Request::is('workshops*') ? 'active' : '' }}" >
-                                <a href="{{ url('/workshops') }}">Workshops</a>
+                                <a href="{{ url('/workshops') }}">
+                                    <span>Workshops</span>
+                                </a>
                             </li>
                             <li class="{{ Request::is('locations*') ? 'active' : '' }}" >
-                                <a href="{{ url('/locations') }}">Locations</a>
+                                <a href="{{ url('/locations') }}">
+                                    <span>Locations</span>
+                                </a>
                             </li>
                             <li class="{{ Request::is('designations*') ? 'active' : '' }}" >
-                                <a href="{{ url('/designations') }}">Designations</a>
+                                <a href="{{ url('/designations') }}">
+                                    <span>Designations</span>
+                                </a>
                             </li>
                             <li class="{{ Request::is('taxes*') ? 'active' : '' }}" >
-                                <a href="{{ url('/taxes') }}">Taxes</a>
+                                <a href="{{ url('/taxes') }}">
+                                    <span>Taxes</span>
+                                </a>
                             </li>
                             <li class="{{ Request::is('users*') ? 'active' : '' }}" >
-                                <a href="{{ url('/users') }}">Users</a>
+                                <a href="{{ url('/users') }}">
+                                    <span>Users</span>
+                                </a>
                             </li>
                             <li class="{{ Request::is('descriptions*') ? 'active' : '' }}" >
-                                <a href="{{ url('/descriptions') }}">Descriptions</a>
+                                <a href="{{ url('/descriptions') }}">
+                                    <span>Descriptions</span>
+                                </a>
                             </li>
                         	<li class="{{ Request::is('expense-categories*') ? 'active' : '' }}" >
-                                <a class="menu-toggle">Expense Categories</a>
+                                <a class="menu-toggle">
+                                    <span>Expense Categories</span>
+                                </a>
                                 <ul class="ml-menu">
                                     <li class="{{ Request::is('expense-categories*') ? 'active' : '' }}" >
                                         <a href="{{ url('/expense-categories') }} ">
@@ -391,7 +407,9 @@
                                 </ul>
                             </li>
                             <li class="{{ Request::is('purchase-categories*') ? 'active' : '' }}" >
-                                <a class="menu-toggle">Purchase Categories</a>
+                                <a class="menu-toggle">
+                                    <span>Purchase Categories</span>
+                                </a>
                                 <ul class="ml-menu">
                                     <li class="{{ Request::is('purchase-categories*') ? 'active' : '' }}" >
                                         <a href="{{ url('/purchase-categories') }} ">
@@ -406,7 +424,9 @@
                                 </ul>
                             </li>
                             <li class="{{ Request::is('asset-categories*', 'subassets*') ? 'active' : '' }}" >
-                                <a class="menu-toggle">Asset Categories</a>
+                                <a class="menu-toggle">
+                                    <span>Asset Categories</span>
+                                </a>
                                 <ul class="ml-menu">
                                     <li class="{{ Request::is('asset-categories*') ? 'active' : '' }}" >
                                         <a href="{{ url('/asset-categories') }} ">
@@ -480,27 +500,35 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="{{ Request::is('report/deposits','report/expenses','report/assets','report/assets/expiry','report/ledgers','report/overall' ) ? 'active' : '' }}" >
+                    <li class="{{ Request::is('report*' ) ? 'active' : '' }}" >
                         <a href="javascript:void(0); " class="menu-toggle">
                             <i class="material-icons">assignment</i>
                             <span>Report</span>
                         </a>
                         <ul class="ml-menu">
-                            <li class="{{ Request::is('/report/deposits') ? 'active' : '' }}" >
-                                <a href="{{ url('/report/deposits') }}">Deposit</a>
+                            <li class="{{ Request::is('report/deposits*') ? 'active' : '' }}" >
+                                <a href="{{ url('/report/deposits') }}">
+                                    <span>Deposit</span>
+                                </a>
                             </li>
-                            <li class="{{ Request::is('/report/expenses') ? 'active' : '' }}" >
-                                <a href="{{ url('/report/expenses') }}">Expense</a>
+                            <li class="{{ Request::is('report/expenses*') ? 'active' : '' }}" >
+                                <a href="{{ url('/report/expenses') }}">
+                                    <span>Expense</span>
+                                </a>
                             </li>
                             <li class="{{ Request::is('report/assets') ? 'active' : '' }}" >
-                                <a href="{{ url('/report/assets') }}">Asset</a>
+                                <a href="{{ url('/report/assets') }}">
+                                    <span>Asset</span>
+                                </a>
                             </li>
-                            <li class="{{ Request::is('report/assets/expiry') ? 'active' : '' }}" >
-                                <a href="{{ url('/report/assets/expiry') }}">Asset Expiry</a>
+                            <li class="{{ Request::is('report/assets/expiry*') ? 'active' : '' }}" >
+                                <a href="{{ url('/report/assets/expiry') }}">
+                                    <span>Asset Expiry</span>
+                                </a>
                             </li>
-                            <li class="{{ Request::is('report/ledgers') ? 'active' : '' }}" >
+                            <!-- <li class="{{ Request::is('report/ledgers') ? 'active' : '' }}" >
                                 <a href="{{ url('/report/ledgers') }}">Ledger</a>
-                            </li>
+                            </li> -->
                             <!--<li>
                                 <a href="{{ url('/report/overall') }}">Overall</a>
                             </li>-->
@@ -670,8 +698,6 @@
 	@yield('content')
     </section> 
 
-    
-
     <!-- Bootstrap Core Js -->
     <script src="{{ asset('bsb/plugins/bootstrap/js/bootstrap.js') }}"></script>
     
@@ -681,17 +707,16 @@
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('bsb/plugins/node-waves/waves.js') }}"></script>
 
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="{{ asset('bsb/plugins/jquery-countto/jquery.countTo.js') }}"></script>
-
     <!-- Morris Plugin Js -->
     <script src="{{ asset('bsb/plugins/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('bsb/plugins/morrisjs/morris.js') }}"></script>
 
+    <script src="{{ asset('bsb/plugins/chartjs/Chart.bundle.js') }}"></script>
+
     
     <!-- Custom Js -->
     <script src="{{ asset('bsb/js/admin.js') }}"></script>
-    <script src="{{ asset('bsb/js/pages/index.js') }}"></script>
+
 
 </body>
 

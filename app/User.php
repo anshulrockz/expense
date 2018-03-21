@@ -46,6 +46,7 @@ class User extends Authenticatable
 				->select('users.*', 'workshops.name as workshop', 'companies.name as company', 'designations.name as designation')
 				->where([
 				['users.deleted_at',null],
+                ['users.id','!=',$id],
 				])
 	            ->leftJoin('companies', 'companies.id', '=', 'users.company_id')
                 ->leftJoin('workshops', 'workshops.id', '=', 'users.workshop_id')
@@ -60,6 +61,7 @@ class User extends Authenticatable
 				->where([
 				['users.deleted_at',null],
 				['users.company_id',$company_id],
+                ['users.id','!=',$id],
 				])
 	            ->leftJoin('companies', 'companies.id', '=', 'users.company_id')
 	            ->leftJoin('workshops', 'workshops.id', '=', 'users.workshop_id')
@@ -74,6 +76,7 @@ class User extends Authenticatable
 				['users.deleted_at',null],
 				['users.company_id',$company_id],
 				['users.workshop_id',$workshop_id],
+                ['users.id','!=',$id],
 				])
 	            ->leftJoin('companies', 'companies.id', '=', 'users.company_id')
 	            ->leftJoin('workshops', 'workshops.id', '=', 'users.workshop_id')

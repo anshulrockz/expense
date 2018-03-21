@@ -475,12 +475,24 @@ $(document).ready(function() {
 		                    </table>
 	                	</div>
 	                </div>
-	                <div class="row clearfix">
+	                @php
+                		$date1=date_create($expense->created_at);
+						$date2=date_create(date("y-m-d H:i:s"));
+						$diff=date_diff($date2,$date1);
+						$days = $diff->format("%a");
+                	@endphp 
+                	
+                	<div class="row clearfix">
 	                	<div class="col-sm-6">
+	                		@if($days<1)
 	                		<button type="submit" id="form-save" class="btn btn-primary waves-effect">Save</button>
-	                		<button type="button" id="form-edit" class="btn btn-primary waves-effect">Edit</button>
+	                		<button type="button" id="form-edit" class="btn btn-primary waves-effect">Edit </button>
+	                		Note:You can edit only in 24hrs of creation 
+	                		@else Note: You cannot edit after 24hrs of creation 
+	                		@endif
 	                	</div>
 	                </div>
+	               
                 </form>
             </div>
         </div>

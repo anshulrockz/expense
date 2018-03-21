@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- JQuery DataTable Css -->
-<link href="{{ asset('bsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
+<!-- Bootstrap Select Css -->
+<link href="{{ asset('bsb/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="https://cdn.datatables.net/fixedheader/3.1.3/css/fixedHeader.dataTables.min.css" rel="stylesheet"/>
     
 <div class="row clearfix">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -82,14 +84,22 @@
 
 <!-- Jquery DataTable Plugin Js -->
 <script src="{{ asset('bsb/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('bsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.3/js/dataTables.fixedHeader.min.js"></script>
 
-<script src="{{ asset('bsb/js/pages/tables/jquery-datatable.js') }}"></script>
+<!-- Select Plugin Js -->
+    <script src="{{ asset('bsb/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
 
 <script>
 $(document).ready(function() {
-$('.datatable').DataTable();
+    $('.datatable').DataTable( {
+        "order": [[ 1, "desc" ]],
+        fixedHeader: {
+            header: true,
+            headerOffset: $('#navbar-collapse').height()
+        }
+    } );
 } );
 </script>
+
 
 @endsection

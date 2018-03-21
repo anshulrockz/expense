@@ -2,15 +2,15 @@
 
 @section('content')
 
+<!-- Bootstrap Material Datetime Picker Css -->
+<link href="{{ asset('bsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet" />
+
 <!-- Bootstrap Select Css -->
 <link href="{{ asset('bsb/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+<link href="{{ asset('bsb/css/datatable-style.css')}}" rel="stylesheet" /> 
 
-<!-- JQuery DataTable Css -->
-<link href="{{ asset('bsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
-
-<!-- Bootstrap Material Datetime Picker Css -->
-<link href="{{ asset('bsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
-
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="https://cdn.datatables.net/fixedheader/3.1.3/css/fixedHeader.dataTables.min.css" rel="stylesheet"/>
 
 
 <div class="row clearfix">
@@ -20,7 +20,7 @@
                 <h2 id="header">
                     Expense Report
                 </h2>
-                <button class="btn btn-primary waves-effect header-dropdown m-r--5" onclick="PrintDiv()" >Print</button>
+                <!-- <button class="btn btn-primary waves-effect header-dropdown m-r--5" id="print" >Print</button> -->
             </div>
             <div class="body">
                 <div class="row ">
@@ -35,7 +35,7 @@
         </div>
     </div>
 </div>
-
+<!-- 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -45,7 +45,7 @@
                         <label for="name">Form</label>
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="text" id="min" class="datepicker form-control" placeholder="Please choose a from date...">
+                                <input type="text" id="datepicker_from" class="datepicker form-control" placeholder="Please choose a from date...">
                             </div>
                         </div>
                     </div>
@@ -53,61 +53,118 @@
                         <label for="name">To</label>
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="text" id="max" class="datepicker form-control" placeholder="Please choose a to date...">
+                                <input type="text" id="datepicker_to" class="datepicker form-control" placeholder="Please choose a to date...">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <label for="name"></label>
-                        <div class="form-inline">
-                            <button id="find" class="btn btn-primary waves-effect header-dropdown m-r--5" >Find</button>
-                            <!-- <select class="form-control show-tick" id="category" name="category">
-                                <option value="">-- Please select category --</option>
-                            </select> -->
+                    </div><!-- 
+                     <div class="col-sm-4">
+                        <label for="category">Category</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <select class="form-control show-tick" id="category" name="category" >
+                                    <option value="">-- Please select one --</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Credit">Credit</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="body">
+                <div class="row clearfix">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 form-control-label">
+                        <label for="email_address_2">From</label>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="form-group">
+                            <!-- <div class="form-line"> -->
+                                <input type="text" id="start" class="datepicker form-control" placeholder="Please choose a from date...">
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 form-control-label">
+                        <label for="email_address_2">To</label>
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-sm-3 col-xs-3">
+                        <div class="form-group">
+                            <!-- <div class="form-line"> -->
+                                <input type="text" id="end" class="datepicker form-control" placeholder="Please choose a from date...">
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover datatable">
-                        <thead>
+                        <thead class="print-header">
                             <tr>
+                                <th>Id</th>
+                                <th>Date</th>
                                 <th>Voucher</th>
                                 <th>Invoice</th>
                                 <th>Spent By</th>
+                                <th>Party Name</th>
+                                <th>Party Gstin</th>
+                                <th>Payment Mode</th>
+                                <th>Supply Type</th>
+                                <th>Supply Category</th>
                                 <th>Expense Category</th>
-                                <th>Subject</th>
+                                <th>Description</th>
+                                <th>Base Valuse</th>
+                                <th>SGST</th>
+                                <th>CGST</th>
+                                <th>IGST</th>
                                 <th>Amount</th>
-                                <th>Voucher Date</th>
-                                <th>Created at</th>
                             </tr>
                         </thead>
-                        <tbody id="TableData">
+                        <tfoot style="display: table-header-group;">
+                            <tr>
+                                <th>id</th>
+                                <th>Date</th>
+                                <th>Voucher</th>
+                                <th>Invoice</th>
+                                <th>Spent By</th>
+                                <th>Party Name</th>
+                                <th>Party Gstin</th>
+                                <th>Payment Mode</th>
+                                <th>Supply Type</th>
+                                <th>Supply Category</th>
+                                <th>Expense Category</th>
+                                <th>Description</th>
+                                <th>Base Valuse</th>
+                                <th>SGST</th>
+                                <th>CGST</th>
+                                <th>IGST</th>
+                                <th>Amount</th>
+                            </tr>
+                        </tfoot>
+                        <tbody class="print-body">
                         	@foreach( $report as $key=>$list)
                             <tr>
+                                <td>{{ $list->id }}</td>
+                                <td>{{date_format(date_create($list->created_at),"m/d/y")}}</td>
                             	<td>{{ $list->voucher_no }}</td>
                             	<td>{{ $list->invoice_no }}</td>
-                                <td>{{$list->user}}</td>
-                                <td>{{$list->category}}
-                                @if(!empty($list->main_category))
-                                	- {{$list->main_category}}
-                                @endif
-                                @if(!empty($list->sub_expenses))
-                            	- {{$list->sub_expenses}}
-                            	@endif
-                                </td>
-                                <td>{{$list->subject}}</td>
-                                <td>{{$list->amount}}</td>
-                                <td>{{date_format(date_create($list->voucher_date),"d F Y")}}</td>
-                                <td>{{date_format(date_create($list->created_at),"d F Y")}}</td>
+                                <td>{{ $list->user}}</td>
+                                <td>{{ $list->party_name}}</td>
+                                <td>{{ $list->party_gstin}}</td>
+                                <td>{{ $list->mode}}</td>
+                                <td>{{ $list->category1}}</td>
+                                <td>{{ $list->category2}}</td>
+                                <td>{{ $list->category3}}</td>
+                                <td>{{ $list->description}}</td>
+                                <td>{{ $list->cost}}</td>
+                                <td>{{ $list->sgst}}</td>
+                                <td>{{ $list->cgst}}</td>
+                                <td>{{ $list->igst}}</td>
+                                <td>{{ $list->cost+$list->sgst+$list->cgst+$list->igst}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -118,182 +175,121 @@
     </div>
 </div>
 
-
-<!-- Select Plugin Js -->
-    <script src="{{ asset('bsb/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
-
 <!-- Jquery DataTable Plugin Js -->
-
-
 <script src="{{ asset('bsb/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.3/js/dataTables.fixedHeader.min.js"></script>
 <script src="{{ asset('bsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
+<script src="{{ asset('bsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('bsb/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('bsb/plugins/jquery-datatable/extensions/export/jszip.min.js') }}"></script>
+<script src="{{ asset('bsb/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
+<script src="{{ asset('bsb/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
+<script src="{{ asset('bsb/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('bsb/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
+
 <!-- Moment Plugin Js -->
 <script src="{{ asset('bsb/plugins/momentjs/moment.js')}}"></script>
 
 <!-- Bootstrap Material Datetime Picker Plugin Js -->
-<script src="{{ asset('bsb/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
+<script src="{{ asset('bsb/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script>
 
-
+<!-- Select Plugin Js -->
+<script src="{{ asset('bsb/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
 
 <script>
-	$(document).ready(function() {
-		document.title = $("#header").html();
-        //$('.datatable').DataTable();
-        $('.datepicker').bootstrapMaterialDatePicker({
-          format: 'DD MMMM YYYY',
-                clearButton: true,
-                weekStart: 1,
-                time: false,
-                autoclose: true
-         });
-	} );
-
-	function PrintDiv() {
-	  	var w = window.open();
-	  	var header = $("#header").html();
-	  	var data = $(".dataTable").html();
-	  	w.document.title = $("#header").html();
-	  	$(w.document.body).html("<h1 style='text-align:center;'>"+header+"</h1><table style='text-align:left;width:100%'>"+data+"</table>");
-	    w.print();
-	}
+$('.datepicker').bootstrapMaterialDatePicker({
+    format: 'MM/DD/YY',
+    clearButton: true,
+    weekStart: 1,
+    time: false
+});
 </script>
 
-<script type="text/javascript" language="javascript" >
+<script>
+
+var normalizeDate = function(dateString) {
+  var date = new Date(dateString);
+  var normalized = date.getFullYear() + '' + (("0" + (date.getMonth() + 1)).slice(-2)) + '' + ("0" + date.getDate()).slice(-2);
+  return normalized;
+}
 
 $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
-        var min = parseInt( $('#start_date1').val(), 10 );
-        var max = parseInt( $('#end_date1').val(), 10 );
-        var age = parseFloat( data[6] ) || 0; // use data for the age column
+        var start = normalizeDate( $('#start').val() );
+        var end = normalizeDate( $('#end').val() );
+        var colDate = normalizeDate( data[1] ) || 0;
  
-        if ( ( isNaN( min ) && isNaN( max ) ) ||
-             ( isNaN( min ) && age <= max ) ||
-             ( min <= age   && isNaN( max ) ) ||
-             ( min <= age   && age <= max ) )
+        if ( ( isNaN( start ) && isNaN( end ) ) ||
+             ( isNaN( start ) && colDate <= end ) ||
+             ( start <= colDate && isNaN( end ) ) ||
+             ( start <= colDate && colDate <= end )
+        ) 
         {
             return true;
         }
+        
         return false;
     }
 );
-
-$.fn.dataTable.ext.search.push(
-                function( settings, data, dataIndex ) {
-                    var array=[];
-                    var today = new Date();
-                    var dd = today.getDate();
-                    var mm = today.getMonth() + 1;
-                    var yyyy = today.getFullYear();
-                     
-                    if (dd<10)
-                    dd = '0'+dd;
-                     
-                    if (mm<10)
-                    mm = '0'+mm;
-                     
-                                today = yyyy+'-'+mm+'-'+dd;
-                     
-                    if ($('#min').val() == '' && $('#max').val() == '') {
-                    return true;
-                    }
-                     if ($('#min').val() != '' || $('#max').val() != '') {
-                    var iMin_temp = $('#min').val();
-                     if (iMin_temp == '') {
-                       iMin_temp = '2009-01-23';
  
-                     }
-                     
-                     var iMax_temp = $('#max').val();
-                     if (iMax_temp == '') {
-                      iMax_temp = '2015-05-01';
-                       array.push(iMax_temp.substr(0,10));
-                       
- 
-                    }
-                     
-                    var arr_min = iMin_temp.split("-");
-                    var arr_max = iMax_temp.split("-");
-                    var arr_date = data[1].split("-");
-           
-                            var iMin = new Date(arr_min[2], arr_min[0], arr_min[1], 0, 0, 0, 0);
-                    var iMax = new Date(arr_max[2], arr_max[0], arr_max[1], 0, 0, 0, 0);
-                    var iDate = new Date(arr_date[2], arr_date[0], arr_date[1], 0, 0, 0, 0);
-                     
-                    if ( iMin == "" && iMax == "" )
-                    {
-                        return true;
-                    }
-                    else if ( iMin == "" && iDate < iMax )
-                    {
-                        return true;
-                    }
-                    else if ( iMin <= iDate && "" == iMax )
-                    {
-                        return true;
-                    }
-                    else if ( iMin <= iDate && iDate <= iMax )
-                    {
-                        return true;
-                    }
-                                         
-                    return false;
-                    }
-                }
-            );
- 
-
-
 $(document).ready(function() {
-
-    var table = $('.datatable').DataTable( {
-        "columnDefs": [
-            {
-                "targets": [ 7 ],
-                "visible": false,
-                //"searchable": false
-            },
-        ]
-    } );
+    document.title = $("#header").html();
+    var table = $('.datatable').DataTable({
+        dom: 'Bfrtip',
+        responsive: true,
+        buttons: [
+             //'copy', 'csv',
+             'excel', 'pdf', 'print'
+        ],
+        "order": [[ 0, "desc" ]],
+        // fixedHeader: {
+        //     header: true,
+        //     headerOffset: $('#navbar-collapse').height()
+        // },
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    });
      
-    // Event listener to the two range filtering inputs to redraw on input
-    $('#min, #max').keyup( function() {
+    table.column( 0 ).visible( false );
+    //table.column( 0 ).order( 'desc' );
+
+    $('#start, #end').change( function() {
         table.draw();
     } );
 } );
+
 </script>
-<script type="text/javascript" language="javascript" >
-// fetch_data('no');
 
- function fetch_data(table_name, start_date='', end_date='')
- {
-    $('.datatable').DataTable().destroy();
-    var dataTable = $('.datatable').DataTable({
-    "processing" : true,
-    "serverSide" : true,
-    "order" : [],
-    "ajax" : {
-    url:"{{ url('/report/datatable') }}",
-    type:"GET",
-    data:{
-     table_name:table_name, start_date:start_date, end_date:end_date
-    }
-   }
-  });
- }
+<script type="text/javascript">
+    
+$('#print').click( function() {
+    var w = window.open();
+    var title = $("#header").html();
+    var header = $(".print-header").html();
+    var body = $(".print-body").html();
+    w.document.title = title;
+    $(w.document.body).html("<h1 style='text-align:center;text-transform:uppercase;'>"+title+"</h1><table style='text-align:left;width:100%'>"+header+body+"</table>");
+    w.print();
+});
 
- $('#111').click(function(){
-  var start_date = $('#start_date').val();
-  var end_date = $('#end_date').val();
-  if(start_date != '' && end_date !='')
-  {
-   //$('.datatable').DataTable().destroy();
-   fetch_data('expense', start_date, end_date);
-  }
-  else
-  {
-   alert("Both Dates are Required");
-  }
- }); 
 </script>
 
 @endsection

@@ -93,6 +93,15 @@ class Expense extends Model
 	{
 		return DB::table('expenses')->orderBy('id', 'desc')->first();
 	}
+
+	public static function expense_bar_chart()
+	{
+		return DB::table('expense_details')
+				->select( DB::raw('YEAR(created_at) AS y'), DB::raw('MONTH(created_at) AS m'), DB::raw('SUM(cost) as total') )
+				->where( DB::raw('YEAR(created_at)'), "=","2018")
+				->groupBy('y', 'm')
+				->get();
+	}
 	
 	public function UserDetails()
     {
@@ -103,4 +112,23 @@ class Expense extends Model
     {
         return $this->hasMany('App\ExpenseDetail', 'expense_id');
     }
+
+	public static function expense_pie_chart()
+	{
+		return DB::table('expense_details')
+				->select( "category1", "category2", "category3", DB::raw('SUM(cost) as total'), DB::raw('SUM(sgst) as sgst'), DB::raw('SUM(cgst) as cgst'), DB::raw('SUM(igst) as igst') )
+				->where('deleted_at',null)
+				->groupBy('category1', 'category2', 'category3')
+				->get();
+	}
+
+	// public static function top_balance()
+	// {
+ //        return DB::table('deposits')
+ //        ->select('to_user', DB::raw('sum(deposits.amount) as depo'), DB::raw('sum(expenses.amount) as exp'))
+ //        ->groupBy('deposits.to_user')
+ //        ->groupBy('expenses.created_by')
+ //        ->leftJoin('expenses', 'deposits.to_user', '=', 'expenses.created_by')
+	//     ->get();
+	// }
 }
