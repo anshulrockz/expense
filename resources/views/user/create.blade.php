@@ -84,7 +84,7 @@ $(function(){
 		                    <div class="form-group">
 			                    <div class="form-line">
 			                        <select class="form-control show-tick" id="company" name="company" required>
-			                            <option value="">-- Please select workshop --</option>
+			                            <option value="">-- Please select company --</option>
 			                            @foreach($companies as $list)
 			                            <option value="{{$list->id}}">{{$list->name}}</option>
 			                            @endforeach

@@ -385,16 +385,14 @@
                                 </a>
                             </li>
                         	<li class="{{ Request::is('expense-categories*') ? 'active' : '' }}" >
-                                <a class="menu-toggle">
+                                <a href="{{ url('/expense-categories') }} ">
                                     <span>Expense Categories</span>
                                 </a>
-                                <ul class="ml-menu">
+                                <!-- <ul class="ml-menu">
                                     <li class="{{ Request::is('expense-categories*') ? 'active' : '' }}" >
-                                        <a href="{{ url('/expense-categories') }} ">
-                                            <span>Expense</span>
-                                        </a>
+                                        
                                     </li>
-                                    <!-- <li>
+                                     <li>
                                         <a href="{{ url('/subexpenses') }} ">
                                             <span>Sub Expense</span>
                                         </a>
@@ -403,10 +401,10 @@
                                         <a href="{{ url('/subsubexpenses') }} ">
                                             <span>Sub Sub Expense</span>
                                         </a>
-                                    </li>-->
-                                </ul>
+                                    </li>
+                                </ul> -->
                             </li>
-                            <li class="{{ Request::is('purchase-categories*') ? 'active' : '' }}" >
+                            <!-- <li class="{{ Request::is('purchase-categories*') ? 'active' : '' }}" >
                                 <a class="menu-toggle">
                                     <span>Purchase Categories</span>
                                 </a>
@@ -416,13 +414,13 @@
                                             <span>Purchase</span>
                                         </a>
                                     </li>
-                                    <!--<li>
+                                    <li>
                                         <a href="{{ url('/subexpenses') }} ">
                                             <span>Sub Purchase</span>
                                         </a>
-                                    </li>-->
+                                    </li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <li class="{{ Request::is('asset-categories*', 'subassets*') ? 'active' : '' }}" >
                                 <a class="menu-toggle">
                                     <span>Asset Categories</span>
@@ -446,14 +444,14 @@
                     @if(auth::user()->user_type <= 3)
                     <li class="{{ Request::is('deposits*') ? 'active' : '' }}" >
                         <a href="{{ url('/deposits') }}" >
-                            <i class="material-icons">view_list</i>
+                            <i class="material-icons">account_balance</i>
                             <span>Deposit</span>
                         </a>
                     </li>
                     @endif
                     <li class="{{ Request::is('expenses*') ? 'active' : '' }}" >
                         <a href="{{ url('/expenses') }}" >
-                            <i class="material-icons">trending_down</i>
+                            <i class="material-icons">account_balance_wallet</i>
                             <span>Expense</span>
                         </a>
                     </li>
@@ -484,7 +482,7 @@
                     </li>-->
                     <li class="{{ Request::is('assets*') ? 'active' : '' }}">
                         <a href="javascript:void(0); " class="menu-toggle">
-                            <i class="material-icons">assistant</i>
+                            <i class="material-icons">business_center</i>
                             <span>Assets</span>
                         </a>
                         <ul class="ml-menu">
@@ -500,9 +498,10 @@
                             </li>
                         </ul>
                     </li>
+                    @if(auth::user()->user_type == 1 || auth::user()->user_type == 3)
                     <li class="{{ Request::is('report*' ) ? 'active' : '' }}" >
                         <a href="javascript:void(0); " class="menu-toggle">
-                            <i class="material-icons">assignment</i>
+                            <i class="material-icons">developer_board</i>
                             <span>Report</span>
                         </a>
                         <ul class="ml-menu">
@@ -534,6 +533,7 @@
                             </li>-->
                         </ul>
                     </li>
+                    @endif
                 </ul>
             </div>
             <!-- #Menu -->

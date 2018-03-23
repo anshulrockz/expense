@@ -52,15 +52,15 @@ class ExpenseController extends Controller
     {
     	if(Auth::user()->user_type == 1)
     	{
-	    	$expense_category = ExpenseCategory::all();
-	    	$purchase_category = PurchaseCategory::all();
-	    	$description = Description::all();
-	    	$tax = Tax::all();
+    		$expense = Expense::super_admin_all();
+	    	return view('expense.index')->with('expense',$expense);
 		}
 		else
     	{
 	    	$expense_category = ExpenseCategory::all();
 	    	$purchase_category = PurchaseCategory::all();
+	    	$description = Description::all();
+	    	$tax = Tax::all();
 		}
     	$balance = $this->expense->balance(); //dd($balance);
     	$voucher_no = $this->expense->lastid();

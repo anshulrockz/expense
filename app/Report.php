@@ -24,24 +24,11 @@ class Report extends Model
 			return DB::table('deposits')
 				->select('deposits.*', 'users.name as user')
 				->where([
-				['users.company_id',$company],
+				//['users.company_id',$company],
 				['deposits.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'deposits.to_user')
 	            //->leftJoin('users', 'users.id', '=', 'deposits.created_by')
-	            ->get();
-		}
-		
-		if(Auth::user()->user_type == 2)
-		{
-			return DB::table('deposits')
-				->select('deposits.*', 'users.name as user')
-				->where([
-				['users.company_id',$company],
-				['users.workshop_id',$workshop],
-				['deposits.deleted_at',null]
-				])
-	            ->leftJoin('users', 'users.id', '=', 'deposits.to_user')
 	            ->get();
 		}
 		
@@ -52,7 +39,19 @@ class Report extends Model
 				->where([
 				['users.company_id',$company],
 				['users.workshop_id',$workshop],
-				['users.id',$user_id],
+				['users.user_type', '!=', '1'],
+				['deposits.deleted_at',null]
+				])
+	            ->leftJoin('users', 'users.id', '=', 'deposits.to_user')
+	            ->get();
+		}
+		
+		if(Auth::user()->user_type == 4)
+		{
+			return DB::table('deposits')
+				->select('deposits.*', 'users.name as user')
+				->where([
+				['deposits.to_user',$user_id],
 				['deposits.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'deposits.to_user')
@@ -78,20 +77,21 @@ class Report extends Model
 	            ->get();
 		}
 		
-		if(Auth::user()->user_type == 2)
+		if(Auth::user()->user_type == 3)
 		{
 			return DB::table('assets')
 				->select('assets.*', 'users.name as user')
 				->where([
 				['users.company_id',$company],
 				['users.workshop_id',$workshop],
-				['assets.deleted_at',null]
+				//['users.user_type', '!=', '1'],
+				['deposits.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'assets.created_by')
 	            ->get();
 		}
 		
-		if(Auth::user()->user_type == 3)
+		if(Auth::user()->user_type == 4)
 		{
 			return DB::table('assets')
 				->select('assets.*', 'users.name as user')
@@ -124,20 +124,20 @@ class Report extends Model
 	            ->get();
 		}
 		
-		if(Auth::user()->user_type == 2)
+		if(Auth::user()->user_type == 3)
 		{
 			return DB::table('asset_news')
 				->select('asset_news.*', 'users.name as user')
 				->where([
-				['users.company_id',$company],
-				['users.workshop_id',$workshop],
+				//['users.company_id',$company],
+				//['users.workshop_id',$workshop],
 				['asset_news.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'asset_news.created_by')
 	            ->get();
 		}
 		
-		if(Auth::user()->user_type == 3)
+		if(Auth::user()->user_type == 4)
 		{
 			return DB::table('asset_news')
 				->select('asset_news.*', 'users.name as user')
@@ -174,7 +174,7 @@ class Report extends Model
 	            ->get();
 		}
 		
-		if(Auth::user()->user_type == 2)
+		if(Auth::user()->user_type == 3)
 		{
 			return DB::table('assets')
 				->select('assets.*', 'users.name as user')
@@ -189,7 +189,7 @@ class Report extends Model
 	            ->get();
 		}
 		
-		if(Auth::user()->user_type == 3)
+		if(Auth::user()->user_type == 4)
 		{
 			return DB::table('assets')
 				->select('assets.*', 'users.name as user')

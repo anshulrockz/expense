@@ -79,8 +79,8 @@ class UserController extends Controller
 		$user->password = bcrypt($request->password);
 		$user->mobile = $request->mobile;
 		//$user->phone = $request->phone;
-		$user->company_id = Auth::user()->company_id;
-		if(Auth::user()->user_type==2)
+		//$user->company_id = Auth::user()->company_id;
+		if(Auth::user()->user_type==3)
     	{
     		$user->company_id = Auth::user()->company_id;
 			$user->workshop_id = Auth::user()->workshop_id;
@@ -145,6 +145,16 @@ class UserController extends Controller
 		
 		$date = $request->dob;
 		$user->dob = date_format(date_create($date),"Y-m-d");
+		if(Auth::user()->user_type==3)
+    	{
+    		$user->company_id = Auth::user()->company_id;
+			$user->workshop_id = Auth::user()->workshop_id;
+		}
+		else
+		{
+			$user->company_id = $request->company;
+			$user->workshop_id = $request->workshop;
+		}
 		
 		$user->name = $request->name;
 		$user->email = $request->email;

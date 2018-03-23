@@ -53,7 +53,7 @@ class DepositController extends Controller
 		
     	if(Auth::user()->user_type==3)
     	{
-    		$users = User::all()->where('workshop_id',Auth::user()->workshop_id);
+    		$users = User::all()->where('workshop_id',Auth::user()->workshop_id)->where('user_type','!=',1)->where('id','!=',Auth::id());
     		return view('deposit.create')->with('users',$users);
 		}
     }

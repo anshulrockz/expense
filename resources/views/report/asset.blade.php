@@ -108,29 +108,35 @@
                     <table class="table table-bordered table-striped table-hover js-basic-example datatable">
                         <thead class="print-header">
                             <tr>
+                                <th>Id</th>
+                                <th>Date</th>
                                 <th>Voucher</th>
                                 <th>Purchased By</th>
                                 <th>Expense Category</th>
                                 <th>Model/Item</th>
                                 <th>Amount</th>
+                                <th>Voucher Date</th>
                                 <th>Expiry Date</th>
-                                <th>Date</th>
                             </tr>
                         </thead>
                         <tfoot style="display: table-header-group;">
                             <tr>
+                                <th>Id</th>
+                                <th>Date</th>
                                 <th>Voucher</th>
                                 <th>Purchased By</th>
                                 <th>Expense Category</th>
                                 <th>Model/Item</th>
                                 <th>Amount</th>
+                                <th>Voucher Date</th>
                                 <th>Expiry Date</th>
-                                <th>Date</th>
                             </tr>
                         </tfoot>
                         <tbody class="print-body">
                         	@foreach( $report2 as $key=>$list)
                             <tr>
+                                <td>{{ $list->id }}</td>
+                                <td>{{date_format(date_create($list->created_at),"m/d/y")}}</td>
                                 <td>{{ $list->voucher_no }}</td>
                                 <td>{{$list->user}}</td>
                                 <td>
@@ -142,23 +148,27 @@
                                 </td>
                                 <td>{{$list->model}}</td>
                                 <td>{{$list->amount}}</td>
-                                <td>{{date_format(date_create($list->expiry),"m/d/y")}}</td>
-                                <td>{{date_format(date_create($list->created_at),"m/d/y")}}</td>
+                                <td>{{date_format(date_create($list->created_at),"d-m-Y")}}</td>
+                                <td>{{date_format(date_create($list->expiry),"d-m-Y")}}</td>
                             </tr>
                             @endforeach
                             @foreach( $report as $key=>$list)
                             <tr>
+                                <td>{{ $list->id }}</td>
+                                <td>{{date_format(date_create($list->created_at),"m/d/y")}}</td>
                                 <td>{{ $list->voucher_no }}</td>
                                 <td>{{$list->user}}</td>
-                                <td>{{$list->main_category}}
-                                    @if(!empty($list->sub_expenses))
-                                	- {{$list->sub_expenses}}
-                                	@endif
+                                <td>
+                                
+                                    {{$list->main_category}}
+                                @if(!empty($list->sub_expenses))
+                                - {{$list->sub_expenses}}
+                                @endif
                                 </td>
                                 <td>{{$list->subject}}</td>
                                 <td>{{$list->amount}}</td>
-                                <td>{{date_format(date_create($list->expiry),"m/d/y")}}</td>
-                                <td>{{date_format(date_create($list->created_at),"m/d/y")}}</td>
+                                <td>{{date_format(date_create($list->created_at),"d-m-Y")}}</td>
+                                <td>{{date_format(date_create($list->expiry),"d-m-Y")}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -211,7 +221,7 @@ $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var start = normalizeDate( $('#start').val() );
         var end = normalizeDate( $('#end').val() );
-        var colDate = normalizeDate( data[4] ) || 0;
+        var colDate = normalizeDate( data[1] ) || 0;
  
         if ( ( isNaN( start ) && isNaN( end ) ) ||
              ( isNaN( start ) && colDate <= end ) ||
@@ -235,11 +245,11 @@ $(document).ready(function() {
              //'copy', 'csv',
              'excel', 'pdf', 'print'
         ],
-        "order": [[ 1, "desc" ]],
-        fixedHeader: {
-            header: true,
-            headerOffset: $('#navbar-collapse').height()
-        },
+        "order": [[ 0, "desc" ]],
+        // fixedHeader: {
+        //     header: true,
+        //     headerOffset: $('#navbar-collapse').height()
+        // },
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
@@ -261,6 +271,8 @@ $(document).ready(function() {
             } );
         }
     });
+
+    table.column( 0 ).visible( false );
      
     $('#start, #end').change( function() {
         table.draw();

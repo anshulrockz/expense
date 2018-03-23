@@ -72,7 +72,7 @@ class AssetNewController extends Controller
 		$asset_new->code = $request->code;
 		$asset_new->location = $request->location;
 		$asset_new->model = $request->model;
-		$asset_new->amount = $request->base_amount;
+		$asset_new->amount = $request->amount;
 		$asset_new->base_amount = $request->base_amount;
 		$asset_new->tax_value = $request->tax;
 		$asset_new->remarks = $request->remarks;
@@ -156,7 +156,7 @@ class AssetNewController extends Controller
 		$asset_new->code = $request->code;
 		$asset_new->location = $request->location;
 		$asset_new->model = $request->model;
-		$asset_new->amount = $request->base_amount;
+		$asset_new->amount = $request->amount;
 		$asset_new->base_amount = $request->base_amount;
 		$asset_new->tax_value = $request->tax;
 		$asset_new->remarks = $request->remarks;

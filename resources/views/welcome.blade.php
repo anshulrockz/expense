@@ -40,14 +40,10 @@
             }
 
             .title {
-                font-size: 90px;
+                font-size: 50px;
 				color: white;
                 font-family: 'Raleway', sans-serif;
             }
-
-            
-			
-			
 
             .m-b-md {
                 margin-bottom: 30px;
@@ -59,7 +55,10 @@
             
             <div class="content">
                 <div class="title m-b-md">
-                    Expense Tracker
+                    
+                <img src="{{ asset('bsb/images/logo.png')}}" style="height: 120px;" alt="PLS Automobile Services Pvt. Ltd."><br>
+                PLS Automobile Services Pvt. Ltd.<br>
+                Expense Tracker
                 </div>
 				@if (Route::has('login'))
 					<div class="links">

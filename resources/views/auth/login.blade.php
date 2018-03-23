@@ -1,10 +1,117 @@
 @extends('layouts.basic')
 
 @section('body')
-<body class="login-page">
-    <div class="login-box">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <style>
+            html, body {
+                background-color: #F44336;
+                font-weight: 200;
+                height: 70vh;
+                margin: 0;
+            }
+
+            .full-height {
+                height: 70vh;
+            }
+
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            .position-ref {
+                position: relative;
+            }
+
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+            .top-left {
+                position: absolute;
+                left: 10px;
+                top: 18px;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            .title {
+                font-size: 50px;
+                color: white;
+                font-family: 'Raleway', sans-serif;
+            }
+
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+        </style>
+
+<style> 
+#panel, #flip {
+    padding: 5px;
+}
+
+#panel {
+    padding: 20px;
+    display: none;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("#login").click(function(){
+        $("#panel").slideDown("slow");
+        $("#flip").slideUp("slow");
+    });
+
+    // $("#panel").click(function(){
+    //     $("#panel").slideUp("slow");
+    //     $("#flip").slideDown("slow");
+    // });
+});
+</script>
+
+<body class="">
+        <div class="flex-center position-ref full-height" id="flip">
+            
+            <div class="content">
+                <div class="title m-b-md">
+                    
+                <img src="{{ asset('bsb/images/logo.png')}}" style="height: 120px;" alt="PLS Automobile Services Pvt. Ltd."><br>
+                PLS Automobile Services Pvt. Ltd.<br>
+                Expense Tracker
+                </div>
+                @if (Route::has('login'))
+                    <div class="links">
+                        @auth
+                            <a class="btn btn-default btn-lg waves-effect" href="{{ url('/dashboard') }}"><b>Dashboard</b></a>
+                            <a class="btn btn-default btn-lg waves-effect" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                <b>Logout</b>
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        @else
+                            <button class="btn btn-default btn-lg waves-effect" id="login" ><b>Login</b></button>
+                        @endauth
+                    </div>
+                @endif
+            </div>
+        </div>
+<div class="login-page">
+    <div class="login-box" id="panel">
         <div class="logo">
-            <a href="javascript:void(0);">EXPENSE TRACKER</a>
+            <a href="javascript:void(0);" style="color: white; font-family: 'Raleway', sans-serif;">EXPENSE TRACKER</a>
+            <!-- <img src="{{ asset('bsb/images/logo.png')}}" style="height: 50px;" alt="PLS Automobile Services Pvt. Ltd."> -->
+                <!-- PLS Automobile Services Pvt. Ltd. -->
         </div>
         <div class="card">
             <div class="body">
@@ -61,5 +168,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 @endsection

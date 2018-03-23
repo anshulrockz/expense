@@ -101,17 +101,19 @@
                         </tfoot> -->
                         <thead class="print-header">
                             <tr>
+                                <th>Id</th>
+                                <th>Date</th>
                                 <th>To</th>
                                 <th>Amount</th>
                                 <th>Payment Mode</th>
                                 <th>Payment Date</th>
-                                <th>Date</th>
                             </tr>
                         </thead>
-                        
                         <tbody class="print-body">
                         	@foreach( $report as $key=>$list)
                             <tr>
+                                <td>{{$list->id}}</td>
+                                <td>{{date_format(date_create($list->created_at),"m/d/y")}}</td>
                                 <td>{{$list->user}}</td>
                                 <td>{{$list->amount}}</td>
                                 <td>
@@ -121,7 +123,6 @@
                                     @endif
                                 </td>
                                 <td>{{date_format(date_create($list->date),"m/d/y")}}</td>
-                                <td>{{date_format(date_create($list->created_at),"m/d/y")}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -174,7 +175,7 @@ $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var start = normalizeDate( $('#start').val() );
         var end = normalizeDate( $('#end').val() );
-        var colDate = normalizeDate( data[4] ) || 0;
+        var colDate = normalizeDate( data[1] ) || 0;
  
         if ( ( isNaN( start ) && isNaN( end ) ) ||
              ( isNaN( start ) && colDate <= end ) ||
@@ -198,7 +199,7 @@ $(document).ready(function() {
              //'copy', 'csv',
              'excel', 'pdf', 'print'
         ],
-        "order": [[ 1, "desc" ]],
+        "order": [[ 0, "desc" ]],
         fixedHeader: {
             header: true,
             headerOffset: $('#navbar-collapse').height()
@@ -225,6 +226,8 @@ $(document).ready(function() {
         }
     });
      
+     table.column( 0 ).visible( false );
+    
     $('#start, #end').change( function() {
         table.draw();
     } );

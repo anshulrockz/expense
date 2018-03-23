@@ -71,14 +71,12 @@
                                 </td>
                                 <td>
                                     <!-- <a href="{{ url('/deposits/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
-                                    @if(Auth::user()->user_type == 1)
                                     <a href="{{ url('/deposits/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
                                     <!--<form style="display: inline;" method="post" action="{{route('deposits.destroy',$list->id)}}">
 				                        {{ csrf_field() }}
 				                        {{ method_field('DELETE') }}
 				                        <button onclick="return confirm('Are you sure you want to Delete?');" type="submit" class="btn btn-sm btn-danger">Delete</button>
 				                    </form>-->
-				                    @endif
                                 </td>
                             </tr>
                             @endforeach

@@ -58,14 +58,22 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 	
 	//Deposits
 	Route::resource('/deposits', 'DepositController');
+
+		//Workshop
+		Route::get('/workshops/ajax','WorkshopController@id_ajax');
 	
+		//Sub Expense Category
+		Route::get('/subexpenses/ajax','SubExpenseController@id_ajax');
+		
+		//Sub Asset Category
+		Route::get('/subassets/ajax','SubAssetController@id_ajax');
+
 	Route::group(['middleware' => 'CheckSuperUser'], function() {
 
 		//company
 		Route::resource('/companies', 'CompanyController');
 		
 		//Workshop
-		Route::get('/workshops/ajax','WorkshopController@id_ajax');
 		Route::resource('/workshops', 'WorkshopController');
 
 		//Location - Ajax
@@ -88,7 +96,6 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 		Route::resource('/expense-categories', 'ExpenseCategoryController');
 
 		//Sub Expense Category
-		Route::get('/subexpenses/ajax','SubExpenseController@id_ajax');
 		Route::resource('/subexpenses', 'SubExpenseController');
 		
 		//Purchase Category
@@ -98,7 +105,6 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 		Route::resource('/asset-categories', 'AssetCategoryController');
 
 		//Sub Asset Category
-		Route::get('/subassets/ajax','SubAssetController@id_ajax');
 		Route::resource('/subassets', 'SubAssetController');
 		
 		//Sub Purchase Category

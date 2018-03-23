@@ -102,7 +102,7 @@ $(function() {
 		                    <div class="form-group">
 			                    <div class="form-line">
 			                        <select class="form-control show-tick" id="company" name="company" required>
-			                            <option value="">-- Please select workshop --</option>
+			                            <option value="">-- Please select company --</option>
 			                            @foreach($companies as $list)
 			                            <option value="{{$list->id}}" @if($list->id==$users->company_id){ selected="selected" } @endif >{{$list->name}}</option>
 			                            @endforeach
