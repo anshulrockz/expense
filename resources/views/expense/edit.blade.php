@@ -277,10 +277,10 @@ $(document).ready(function() {
 		                    </div>
 	                    </div>
 	                    <div class="col-sm-6 ">
-		                    <label for="party_name">Party Name</label>
+		                    <label for="party_name">Seller Name</label>
 		                    <div class="form-group form-float">
 		                        <div class="form-line ">
-		                            <input type="text" id="party_name" name="party_name" class="form-control" placeholder="Enter party name" value="{{ $expense->party_name }}" >
+		                            <input type="text" id="party_name" name="party_name" class="form-control" placeholder="Enter sarty name" value="{{ $expense->party_name }}" >
 		                        </div>
 		                    </div>
 	                    </div>

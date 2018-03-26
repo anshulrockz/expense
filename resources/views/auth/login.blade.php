@@ -8,6 +8,7 @@
                 font-weight: 200;
                 height: 70vh;
                 margin: 0;
+                text-align: center;
             }
 
             .full-height {
@@ -33,10 +34,6 @@
                 position: absolute;
                 left: 10px;
                 top: 18px;
-            }
-
-            .content {
-                text-align: center;
             }
 
             .title {
@@ -77,8 +74,7 @@ $(document).ready(function(){
 </script>
 
 <body class="">
-        <div class="flex-center position-ref full-height" id="flip">
-            
+        <!-- <div class="flex-center position-ref full-height" id="flip">
             <div class="content">
                 <div class="title m-b-md">
                     
@@ -105,9 +101,9 @@ $(document).ready(function(){
                     </div>
                 @endif
             </div>
-        </div>
+        </div> -->
 <div class="login-page">
-    <div class="login-box" id="panel">
+    <div class="login-box" id="">
         <div class="logo">
             <a href="javascript:void(0);" style="color: white; font-family: 'Raleway', sans-serif;">EXPENSE TRACKER</a>
             <!-- <img src="{{ asset('bsb/images/logo.png')}}" style="height: 50px;" alt="PLS Automobile Services Pvt. Ltd."> -->
@@ -147,27 +143,34 @@ $(document).ready(function(){
                             <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
 						</div>
                     </div>
-                    <div class="row">
+                    <div class="row ">
                         <!--<div class="col-xs-8 p-t-5">
                             <input type="checkbox" name="remember" id="rememberme" class="filled-in chk-col-pink" {{ old('remember') ? 'checked' : '' }}>
                             <label for="rememberme" >Remember Me</label>
                         </div>-->
-                        <div class="col-xs-4">
+                        <div class="col-xs-4 pull-right">
                             <button class="btn btn-block bg-pink waves-effect" type="submit">LOG IN</button>
                         </div>
                     </div>
-                    <div class="row m-t-15 m-b--20">
-                        <!--<div class="col-xs-6">
+                    <!-- <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
                             <a href="sign-up.html">Register Now!</a>
-                        </div>-->
+                        </div>
                         <div class="col-xs-6 align-right">
 							<a href="{{ route('password.request') }}">Forgot Your Password?</a>
                         </div>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
+        <div class="logo">
+            <span style="color: white; font-family: 'Raleway', sans-serif;font-size:10px;" >Designed & Developed By</span>
+            <a href="http://techstreet.in/" style="color: white; font-family: 'Raleway', sans-serif;font-size:20px;" >Techstreet Solutions</a>
+        </div>
     </div>
 </div>
+
+
+
 </body>
 @endsection

@@ -50,18 +50,18 @@ class ExpenseController extends Controller
 
     public function create()
     {
-    	if(Auth::user()->user_type == 1)
-    	{
-    		$expense = Expense::super_admin_all();
-	    	return view('expense.index')->with('expense',$expense);
-		}
-		else
-    	{
+  //   	if(Auth::user()->user_type == 1)
+  //   	{
+  //   		$expense = Expense::super_admin_all();
+	 //    	return view('expense.index')->with('expense',$expense);
+		// }
+		// else
+  //   	{
 	    	$expense_category = ExpenseCategory::all();
 	    	$purchase_category = PurchaseCategory::all();
 	    	$description = Description::all();
 	    	$tax = Tax::all();
-		}
+		// }
     	$balance = $this->expense->balance(); //dd($balance);
     	$voucher_no = $this->expense->lastid();
     	if(empty($voucher_no)) $voucher_no == 0;

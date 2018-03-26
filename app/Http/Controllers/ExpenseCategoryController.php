@@ -46,7 +46,6 @@ class ExpenseCategoryController extends Controller
     {
         $this->validate($request,[
 			'name'=>'required|max:255',
-			'department'=>'required|max:255'
 		]);
 		
 		$expense_category = new ExpenseCategory;

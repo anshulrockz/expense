@@ -12,13 +12,13 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Asset
+                    Asset Old
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li class="active">Asset</li>
+                    <li class="active">Asset Old</li>
                 </ol>
             </div>
         </div>
@@ -41,12 +41,10 @@
                         <thead>
                             <tr>
                                 <th>Asset ID</th>
-                                <th>Puchased By</th>
                                 <th>Asset Category</th>
                                 <th>Model</th>
                                 <th>Amount</th>
-                                <th>Invoice Date</th>
-                                <th>Expiry Date</th>
+                                <th>Warranty Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -54,7 +52,6 @@
                         	@foreach( $asset as $key=>$list)
                             <tr>
                             	<td>{{ $list->voucher_no }}</td>
-                                <td>{{$list->user}}</td>
                                 <td>{{$list->main_category}}
 	                                @if(!empty($list->sub_assets))
 	                            	- {{$list->sub_assets}}
@@ -62,7 +59,6 @@
                                 </td>
                                 <td>{{$list->model}}</td>
                                 <td>{{$list->amount}}</td>
-                                <td>{{date_format(date_create($list->invoice_date),"d F Y")}}</td>
                                 <td>{{date_format(date_create($list->expiry),"d F Y")}}</td>
                                 <td>
                                     <!-- <a href="{{ url('/assets/new/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->

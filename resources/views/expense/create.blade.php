@@ -63,7 +63,7 @@ $(function(){
         	var cost = $('#cost_main').val();
         	var tax = $('#tax_main').val();
         	
-        	if(cost < 1) cost = 0;
+        	if(cost < 0) cost = 0;
         	if ($("#radio_1:checked").val() == '1') {
                 sgst = (cost*tax)/200;
 				cgst = (cost*tax)/200;
@@ -79,7 +79,7 @@ $(function(){
 				$('.cgst_tr').hide();
 				$('.igst_tr').show();
             }
-		    
+            
 		    amount = parseFloat(cost)+parseFloat(sgst)+parseFloat(cgst)+parseFloat(igst);
 		    amount = parseFloat(amount).toFixed(2);
 
@@ -256,10 +256,10 @@ $(document).ready(function() {
 		                    </div>
 	                    </div>
 	                    <div class="col-sm-6 ">
-		                    <label for="party_name">Party Name</label>
+		                    <label for="party_name">Seller Name</label>
 		                    <div class="form-group form-float">
 		                        <div class="form-line ">
-		                            <input type="text" id="party_name" name="party_name" class="form-control" placeholder="Enter party name" value="{{ old('party_name') }}" >
+		                            <input type="text" id="party_name" name="party_name" class="form-control" placeholder="Enter seller name" value="{{ old('party_name') }}" >
 		                        </div>
 		                    </div>
 	                    </div>

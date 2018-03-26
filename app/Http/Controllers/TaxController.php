@@ -38,7 +38,7 @@ class TaxController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-			'value'=>'number|required|max:255'
+			'value'=>'numeric|required|max:255'
 		]);
 		
 		$tax = new tax;

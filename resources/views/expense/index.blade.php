@@ -43,7 +43,7 @@
                             <tr>
                                 <th>Voucher No</th>
                                 <th>Spent By</th>
-                                <th>Party Name</th>
+                                <th>Seller Name</th>
                                 <th>Amount</th>
                                 <th>Voucher Date</th>
                                 <th>Status</th>

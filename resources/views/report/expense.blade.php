@@ -110,8 +110,8 @@
                                 <th>Voucher</th>
                                 <th>Invoice</th>
                                 <th>Spent By</th>
-                                <th>Party Name</th>
-                                <th>Party Gstin</th>
+                                <th>Seller Name</th>
+                                <th>Seller Gstin</th>
                                 <th>Payment Mode</th>
                                 <th>Supply Type</th>
                                 <th>Supply Category</th>
@@ -131,8 +131,8 @@
                                 <th>Voucher</th>
                                 <th>Invoice</th>
                                 <th>Spent By</th>
-                                <th>Party Name</th>
-                                <th>Party Gstin</th>
+                                <th>Seller Name</th>
+                                <th>Seller Gstin</th>
                                 <th>Payment Mode</th>
                                 <th>Supply Type</th>
                                 <th>Supply Category</th>

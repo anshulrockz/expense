@@ -92,7 +92,7 @@ class UserController extends Controller
 		}
 		//$user->location_id = $request->location;
 		$user->user_type = $request->employee_type;
-		$user->designation = $request->designation;
+		$user->designation_id = $request->designation;
 		$user->address = $request->address;
 		$user->status = 1;
 		$user->user_sys = \Request::ip();

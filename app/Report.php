@@ -218,7 +218,8 @@ class Report extends Model
 			return DB::table('expenses')
 				->select('expenses.*', 'expense_details.*', 'users.name as user')
 				->where([
-				['users.company_id',$company],
+				//['users.company_id',$company],
+				['expenses.status',1],
 				['expenses.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'expenses.created_by')
@@ -233,6 +234,7 @@ class Report extends Model
 				->where([
 				['users.company_id',$company],
 				['users.workshop_id',$workshop],
+				['expenses.status',1],
 				['expenses.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'expenses.created_by')
@@ -248,6 +250,7 @@ class Report extends Model
 				['users.company_id',$company],
 				['users.workshop_id',$workshop],
 				['users.id',$user_id],
+				['expenses.status',1],
 				['expenses.deleted_at',null]
 				])
 	            ->leftJoin('users', 'users.id', '=', 'expenses.created_by')
