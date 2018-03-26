@@ -43,13 +43,13 @@ $(".search").change(function(){
         <div class="card">
         	<div class="header">
                 <h2>
-                    Sub Sub Expense Category
+                    Expense Category
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li><a href="{{ url('/subsubexpenses') }}">Sub Sub Expense Category</a></li>
+                    <li><a href="{{ url('expense-categories/expense-category') }}">Expense Category</a></li>
                     <li class="active">Create</li>
                 </ol>
             </div>
@@ -72,7 +72,7 @@ $(".search").change(function(){
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{route('subsubexpenses.store')}}">
+                <form method="post" action="{{route('expense-category.store')}}">
                 	{{ csrf_field() }}
                 	<div class="row clearfix">
 	                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

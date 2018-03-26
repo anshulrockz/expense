@@ -226,18 +226,18 @@ $(document).ready(function() {
 	                </div>
 	                <div class="row clearfix ">
 	                    <div class="col-sm-3 ">
-		                    <label for="model">Model</label>
-		                    <div class="form-group">
-		                        <div class="form-line">
-		                            <input type="text" id="model" name="model" class="form-control" placeholder="Enter model or asset name" value="{{ old('model') }}" >
-		                        </div>
-		                    </div>
-	                    </div>
-	                    <div class="col-sm-3 ">
 		                    <label for="code">HSN/SAC</label>
 		                    <div class="form-group">
 		                        <div class="form-line">
 		                            <input type="text" id="code" name="code" class="form-control" placeholder="Enter HSN code" value="{{ old('code') }}" >
+		                        </div>
+		                    </div>
+	                    </div>
+	                    <div class="col-sm-3 ">
+		                    <label for="model">Model</label>
+		                    <div class="form-group">
+		                        <div class="form-line">
+		                            <input type="text" id="model" name="model" class="form-control" placeholder="Enter model or asset name" value="{{ old('model') }}" >
 		                        </div>
 		                    </div>
 	                    </div>

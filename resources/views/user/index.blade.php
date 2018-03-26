@@ -47,8 +47,8 @@
                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="dataTable">
                         <thead>
                             <tr>
-                                <th>company</th>
-                                <th>Workshop</th>
+                                <th>Company</th>
+                                <th>Location</th>
                                 <th>Name</th>
                                 <th>User Id</th>
                                 <th>Mobile</th>

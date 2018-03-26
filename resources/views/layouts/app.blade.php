@@ -305,7 +305,7 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0); "><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="{{ url('users/'.Auth::id().'/edit')}}"><i class="material-icons">person</i>Profile</a></li>
                             <li role="seperator" class="divider"></li>
                             <li><a href="javascript:void(0); "><i class="material-icons">group</i>Followers</a></li>
                             <li><a href="javascript:void(0); "><i class="material-icons">shopping_cart</i>Sales</a></li>
@@ -350,20 +350,25 @@
                         </a>
                         <ul class="ml-menu">
                             <li class="{{ Request::is('companies*') ? 'active' : '' }}" >
-                                <a href="{{ url('/companies') }}">
+                                <a href="{{ url('companies') }}">
                                     <span>Companies</span>
                                 </a>
                             </li>
-                            <li class="{{ Request::is('workshops*') ? 'active' : '' }}" >
-                                <a href="{{ url('/workshops') }}">
-                                    <span>Workshops</span>
-                                </a>
-                            </li>
                             <li class="{{ Request::is('locations*') ? 'active' : '' }}" >
-                                <a href="{{ url('/locations') }}">
+                                <a href="{{ url('locations') }}">
                                     <span>Locations</span>
                                 </a>
                             </li>
+                            <li class="{{ Request::is('users*') ? 'active' : '' }}" >
+                                <a href="{{ url('/users') }}">
+                                    <span>Users</span>
+                                </a>
+                            </li>
+                            <!-- <li class="{{ Request::is('locations*') ? 'active' : '' }}" >
+                                <a href="{{ url('/locations') }}">
+                                    <span>Locations</span>
+                                </a>
+                            </li> -->
                             <li class="{{ Request::is('designations*') ? 'active' : '' }}" >
                                 <a href="{{ url('/designations') }}">
                                     <span>Designations</span>
@@ -374,35 +379,32 @@
                                     <span>Taxes</span>
                                 </a>
                             </li>
-                            <li class="{{ Request::is('users*') ? 'active' : '' }}" >
-                                <a href="{{ url('/users') }}">
-                                    <span>Users</span>
-                                </a>
-                            </li>
                             <li class="{{ Request::is('descriptions*') ? 'active' : '' }}" >
                                 <a href="{{ url('/descriptions') }}">
                                     <span>Descriptions</span>
                                 </a>
                             </li>
                         	<li class="{{ Request::is('expense-categories*') ? 'active' : '' }}" >
-                                <a href="{{ url('/expense-categories') }} ">
+                                <a class="menu-toggle" >
                                     <span>Expense Categories</span>
                                 </a>
-                                <!-- <ul class="ml-menu">
-                                    <li class="{{ Request::is('expense-categories*') ? 'active' : '' }}" >
-                                        
-                                    </li>
-                                     <li>
-                                        <a href="{{ url('/subexpenses') }} ">
-                                            <span>Sub Expense</span>
+                                <ul class="ml-menu">
+                                    <li class="{{ Request::is('expense-categories/supply-type*') ? 'active' : '' }}" >
+                                        <a href="{{ url('expense-categories/supply-type') }} ">
+                                            <span>Supply Type</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ url('/subsubexpenses') }} ">
-                                            <span>Sub Sub Expense</span>
+                                     <li class="{{ Request::is('expense-categories/supply-category*') ? 'active' : '' }}" >
+                                        <a href="{{ url('expense-categories/supply-category') }} ">
+                                            <span>Supply Category</span>
                                         </a>
                                     </li>
-                                </ul> -->
+                                    <li class="{{ Request::is('expense-categories/expense-category*') ? 'active' : '' }}" >
+                                        <a href="{{ url('expense-categories/expense-category') }} ">
+                                            <span>Expense Category</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <!-- <li class="{{ Request::is('purchase-categories*') ? 'active' : '' }}" >
                                 <a class="menu-toggle">

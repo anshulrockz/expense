@@ -12,7 +12,7 @@
 <script>
 $(function(){
 
-	$("#expense_category").change(function(){
+	$("#supply_type_main").change(function(){
 		var id = $(this).val();
 		if(id != ''){
 			$.ajax({
@@ -23,7 +23,7 @@ $(function(){
 					var data = JSON.parse(data);
 					var selOpts = "";
 					if(data.length >0){				
-						$('#sub_expense option').remove();	
+						$('#supply_category_main option').remove();	
 						console.log(data);
 			            for (i=0;i<data.length;i++)
 			            {
@@ -31,12 +31,43 @@ $(function(){
 			                var val = data[i].name;
 			                selOpts += "<option value='"+id+"'>"+val+"</option>";
 			            }
-			            $('.sub_expense').show();
-			            $('#sub_expense').append(selOpts);
+			            //$('.sub_expense').show();
+			            $('#supply_category_main').append(selOpts);
 					}
 					else{
-						$('.sub_expense').hide();
-						$('#sub_expense option').remove();
+						//$('.sub_expense').hide();
+						$('#supply_category_main option').remove();
+					}
+				}
+			});
+		}
+	});
+
+	$("#supply_category_main").change(function(){
+		var id = $(this).val();
+		if(id != ''){
+			$.ajax({
+				type: "GET",
+				url: "{{url('/subsubexpenses/ajax')}}",
+				data:'id='+id,
+				success: function(data){
+					var data = JSON.parse(data);
+					var selOpts = "";
+					if(data.length >0){				
+						$('#expense_category_main option').remove();	
+						console.log(data);
+			            for (i=0;i<data.length;i++)
+			            {
+			                var id = data[i].id; 
+			                var val = data[i].name;
+			                selOpts += "<option value='"+id+"'>"+val+"</option>";
+			            }
+			            //$('.sub_expense').show();
+			            $('#expense_category_main').append(selOpts);
+					}
+					else{
+						//$('.sub_expense').hide();
+						$('#expense_category_main option').remove();
 					}
 				}
 			});
@@ -61,36 +92,37 @@ $(function(){
         	var description = $('#description_main').val();
         	var code = $('#code_main').val();
         	var cost = $('#cost_main').val();
+        	var quantity = $('#quantity_main').val();
         	var tax = $('#tax_main').val();
         	
         	if(cost < 0) cost = 0;
         	if ($("#radio_1:checked").val() == '1') {
-                sgst = (cost*tax)/200;
-				cgst = (cost*tax)/200;
+                sgst = (cost*quantity*tax)/200;
+				cgst = (cost*quantity*tax)/200;
 
 				$('.sgst_tr').show();
 				$('.cgst_tr').show();
 				$('.igst_tr').hide();
             }
 			if ($("#radio_2:checked").val() == '2') {
-               igst = (cost*tax)/100;
+               igst = (cost*quantity*tax)/100;
 
                	$('.sgst_tr').hide();
 				$('.cgst_tr').hide();
 				$('.igst_tr').show();
             }
-            
-		    amount = parseFloat(cost)+parseFloat(sgst)+parseFloat(cgst)+parseFloat(igst);
+            abt = parseFloat(cost*quantity);
+		    amount = parseFloat(cost*quantity)+parseFloat(sgst)+parseFloat(cgst)+parseFloat(igst);
 		    amount = parseFloat(amount).toFixed(2);
 
         	var delBtn = '<button type="button" class="btn btn-danger btn-xs m-t-15 waves-effect delete-row"><i class="material-icons">remove_circle</i></button>';
 
-            var markup = '<tr><td>'+type+'<input name="type[]" class="form-control " type="hidden" value="'+type+'"  /></td><td>'+category+'<input name="category[]" class="form-control " type="hidden" value="'+category+'"  /></td><td>'+expense_category+'<input name="expense_category[]" class="form-control " type="hidden" value="'+expense_category+'"  /></td><td>'+description+'<input name="description[]" class="form-control " type="hidden" value="'+description+'"  /></td><td>'+code+'<input name="code[]" class="form-control " type="hidden" value="'+code+'"  /></td><td class="cost_td">'+cost+'<input name="cost[]" class="form-control cost1" type="hidden" value="'+cost+'"  /></td> <td class="sgst_td"> '+sgst+'<input name="sgst[]" class="form-control sgst" type="hidden" value="'+sgst+'"  />  </td><td class="tax_amount_td">'+cgst+'<input name="cgst[]" class="form-control cgst" type="hidden" value="'+cgst+'" />  </td><td class="tax_amount_td">'+igst+' <input name="igst[]" class="form-control igst" type="hidden" value="'+igst+'"  />  </td> <td class="amount_td"> '+amount+' <input name="amount[]" class="form-control unamount1" type="hidden" value="'+amount+'" /> </td><td>'+delBtn+'</td></tr> ';
+            var markup = '<tr><td>'+type+'<input name="type[]" class="form-control " type="hidden" value="'+type+'"  /></td><td>'+category+'<input name="category[]" class="form-control " type="hidden" value="'+category+'"  /></td><td>'+expense_category+'<input name="expense_category[]" class="form-control " type="hidden" value="'+expense_category+'"  /></td><td>'+description+'<input name="description[]" class="form-control " type="hidden" value="'+description+'"  /></td><td>'+code+'<input name="code[]" class="form-control " type="hidden" value="'+code+'"  /></td><td class="cost_td">'+cost+'<input name="cost[]" class="form-control cost1" type="hidden" value="'+cost+'"  /></td><td class="quantity_td">'+quantity+'<input name="quantity[]" class="form-control quantity" type="hidden" value="'+quantity+'"  /></td><td class="abt_td">'+abt+'<input name="abt[]" class="form-control abt" type="hidden" value="'+abt+'"  /></td> <td class="sgst_td"> '+sgst+'<input name="sgst[]" class="form-control sgst" type="hidden" value="'+sgst+'"  />  </td><td class="tax_amount_td">'+cgst+'<input name="cgst[]" class="form-control cgst" type="hidden" value="'+cgst+'" />  </td><td class="tax_amount_td">'+igst+' <input name="igst[]" class="form-control igst" type="hidden" value="'+igst+'"  />  </td> <td class="amount_td"> '+amount+' <input name="amount[]" class="form-control unamount1" type="hidden" value="'+amount+'" /> </td><td>'+delBtn+'</td></tr> ';
 							  
             $("table tbody").append(markup);
 
             
-            $("input[class *= 'cost1']").each(function(){
+            $("input[class *= 'abt']").each(function(){
 	        	total_cost += +$(this).val();
 	    	}); 
             $("input[class *= 'sgst']").each(function(){
@@ -134,7 +166,7 @@ $(function(){
         	var total_igst = 0; 
 			var total_amount = 0;
 
-			$("input[class *= 'cost1']").each(function(){
+			$("input[class *= 'abt']").each(function(){
 	        	total_cost += +$(this).val();
 	    	}); 
             $("input[class *= 'sgst']").each(function(){
@@ -264,10 +296,10 @@ $(document).ready(function() {
 		                    </div>
 	                    </div>
 	                    <div class="col-sm-6 ">
-		                    <label for="party_gstin">Party GSTIN</label>
+		                    <label for="party_gstin">Seller GSTIN</label>
 		                    <div class="form-group form-float">
 		                        <div class="form-line ">
-		                            <input type="text" id="party_gstin" name="party_gstin" class="form-control" placeholder="Enter party_gstin " value="{{ old('party_gstin') }}" >
+		                            <input type="text" id="party_gstin" name="party_gstin" class="form-control" placeholder="Enter seller gstin " value="{{ old('party_gstin') }}" >
 		                        </div>
 		                    </div>
 	                    </div>
@@ -314,6 +346,7 @@ $(document).ready(function() {
 		                                <th >Description</th>
 		                                <th >HSN/SAC</th>
 		                                <th >Base Value</th>
+		                                <th >Quantity</th>
 		                                <th >Tax %</th>
 		                                <th >Action</th>
 		                            </tr>
@@ -322,8 +355,12 @@ $(document).ready(function() {
 						                    <div class="form-group ">
 							                    <div class="form-line ">
 							                        <select class="form-control" id="supply_type_main">
-							                            <option value="Service" >Service</option>
-							                            <option value="Material" >Material</option>
+							                        	<option value="" >select</option>
+							                        	@foreach($expense_category as $list)
+							                            <option value="{{$list->id}}">{{$list->name}}</option>
+							                            @endforeach
+							                            <!-- <option value="Service" >Service</option>
+							                            <option value="Material" >Material</option> -->
 							                        </select>
 						                    	</div>
 					                    	</div>
@@ -342,9 +379,7 @@ $(document).ready(function() {
 						                    <div class="form-group">
 							                    <div class="form-line ">
 							                        <select class="form-control show-tick" id="expense_category_main">
-							                            @foreach($expense_category as $list)
-							                            <option value="{{$list->name}}">{{$list->name}}</option>
-							                            @endforeach
+							                           
 							                        </select>
 						                    	</div>
 					                    	</div>
@@ -364,7 +399,7 @@ $(document).ready(function() {
 		                                	<div class="form-group form-float">
 						                        <div class="form-line focused">
 					                                <div class="fallback">
-					                                    <input id="code_main" class="form-control code" type="text" />
+					                                    <input id="code_main" class="form-control" type="text" />
 					                                </div>
 							                    </div>
 						                    </div>
@@ -378,6 +413,15 @@ $(document).ready(function() {
 							                    </div>
 						                    </div>
 					                	</td>
+		                                <td >
+						                    <div class="form-group form-float">
+							                    <div class="form-line focused"> 
+					                                <div class="fallback">
+					                                    <input id="quantity_main" class="form-control " type="text" />
+					                                </div>
+							                    </div>
+					                    	</div>
+		                                </td>
 		                                <td >
 						                    <div class="form-group form-float">
 							                    <div class="form-line ">
@@ -407,6 +451,8 @@ $(document).ready(function() {
 		                                <th >Description</th>
 		                                <th >HSN/SAC</th>
 		                                <th >Base Value</th>
+		                                <th >Quantity</th>
+		                                <th >Amount</th>
 		                                <th >SGST</th>
 		                                <th >CGST</th>
 		                                <th >IGST</th>
@@ -419,7 +465,7 @@ $(document).ready(function() {
 		                        </tbody>
 		                        <tfoot class="final_amount">
 		                            <tr>
-		                            	<th colspan="9" style="text-align: right;">Amount Before Tax</th>
+		                            	<th colspan="11" style="text-align: right;">Amount Before Tax</th>
 		                            	<td class="amount_before_tax_td">
 		                                	<!-- <div class="form-group form-float">
 						                        <div class="form-line">
@@ -432,7 +478,7 @@ $(document).ready(function() {
 					                	<th></th>
 		                            </tr>
 		                            <tr class="sgst_tr">
-		                            	<th colspan="9" style="text-align: right;">SGST Amount</th>
+		                            	<th colspan="11" style="text-align: right;">SGST Amount</th>
 		                            	<td class="sgst_amount_td">
 		                                	<!-- <div class="form-group form-float">
 						                        <div class="form-line">
@@ -445,7 +491,7 @@ $(document).ready(function() {
 					                	<th></th>
 		                            </tr>
 		                            <tr class="cgst_tr">
-		                            	<th colspan="9" style="text-align: right;">CGST Amount</th>
+		                            	<th colspan="11" style="text-align: right;">CGST Amount</th>
 		                            	<td class="cgst_amount_td">
 		                                	<!-- <div class="form-group form-float">
 						                        <div class="form-line">
@@ -458,7 +504,7 @@ $(document).ready(function() {
 					                	<th></th>
 		                            </tr>
 		                            <tr class="igst_tr">
-		                            	<th colspan="9" style="text-align: right;">IGST Amount</th>
+		                            	<th colspan="11" style="text-align: right;">IGST Amount</th>
 		                            	<td class="igst_amount_td">
 		                                	<!-- <div class="form-group form-float">
 						                        <div class="form-line">
@@ -471,7 +517,7 @@ $(document).ready(function() {
 					                	<th></th>
 		                            </tr>
 		                            <tr class="">
-		                            	<th colspan="9" style="text-align: right;">Total Amount</th>
+		                            	<th colspan="11" style="text-align: right;">Total Amount</th>
 		                            	<td class="total_amount_td">
 		                                	<!-- <div class="form-group form-float">
 						                        <div class="form-line">

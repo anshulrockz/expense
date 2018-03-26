@@ -10,14 +10,14 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Expense Category
+                    Supply Type
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li><a href="{{ url('/expense-categories') }}">Expense Category</a></li>
-                    <li><a href="{{ url('/expense-categories/'.$expense_category->id) }}">{{$expense_category->name}}</a></li>
+                    <li><a href="{{ url('expense-categories/supply-type') }}">Supply Type</a></li>
+                    <li><a href="{{ url('expense-categories/supply-type/'.$expense_category->id) }}">{{$expense_category->name}}</a></li>
                     <li class="active">Edit</li>
                 </ol>
             </div>
@@ -40,7 +40,7 @@
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{route('expense-categories.update',$expense_category->id)}}">
+                <form method="post" action="{{route('supply-type.update',$expense_category->id)}}">
                 	{{ csrf_field() }}
 	                {{ method_field('PUT') }}
                     <label for="name">Name</label>

@@ -36,12 +36,11 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                    <table class="table table-bordered table-striped table-hover dataTable">
                         <thead>
                             <tr>
                                 <th>Tax</th>
                                 <th>Value(%)</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -58,11 +57,6 @@
                             <tr>
                                 <td>{{$list->name}}</td>
                                 <td>{{$list->value}}</td>
-                                <td>
-                                	@if($list->status==1){{"Active"}}
-                                	@else {{"Inactive"}}
-                                	@endif
-                                </td>
                                 <td>
                                     <!-- <a href="{{ url('/taxes/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
                                     <a href="{{ url('/taxes/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>

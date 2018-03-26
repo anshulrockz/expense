@@ -64,6 +64,9 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 	
 		//Sub Expense Category
 		Route::get('/subexpenses/ajax','SubExpenseController@id_ajax');
+
+		//Sub Sub Expense Category
+		Route::get('/subsubexpenses/ajax','SubSubExpenseController@id_ajax');
 		
 		//Sub Asset Category
 		Route::get('/subassets/ajax','SubAssetController@id_ajax');
@@ -74,11 +77,11 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 		Route::resource('/companies', 'CompanyController');
 		
 		//Workshop
-		Route::resource('/workshops', 'WorkshopController');
+		Route::resource('/locations', 'WorkshopController');
 
 		//Location - Ajax
 		//Route::get('/locations/ajax','LocationController@id_ajax');
-		Route::resource('/locations', 'LocationController');
+		//Route::resource('/locations', 'LocationController');
 
 		//Department
 		Route::resource('/descriptions', 'DescriptionController');
@@ -92,11 +95,14 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 		//Employee(user) Type
 		Route::resource('/employee-types', 'EmployeeTypeController');
 
-		//Expense Category
-		Route::resource('/expense-categories', 'ExpenseCategoryController');
+		//supply type
+		Route::resource('expense-categories/supply-type', 'ExpenseCategoryController');
 
 		//Sub Expense Category
-		Route::resource('/subexpenses', 'SubExpenseController');
+		Route::resource('expense-categories/supply-category', 'SubExpenseController');
+
+		//Sub Sub Expense Category - Ajax
+		Route::resource('expense-categories/expense-category', 'SubSubExpenseController');
 		
 		//Purchase Category
 		Route::resource('/purchase-categories', 'PurchaseCategoryController');
@@ -115,9 +121,7 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 		//Route::get('/employees/ajax','EmployeeController@id_ajax');
 		//Route::resource('/employees', 'EmployeeController');
 		
-		//Sub Sub Expense Category - Ajax
-		//Route::get('/subsubexpenses/ajax','SubSubExpenseController@id_ajax');
-		//Route::resource('/subsubexpenses', 'SubSubExpenseController');
+		
 		
 	});
 

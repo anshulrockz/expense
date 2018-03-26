@@ -196,11 +196,11 @@ function paymentMode(mode){
 	                    @endif
 	                    @if(Auth::user()->user_type<=3)
 	                    <div class="col-sm-6">
-		                    <label for="workshop">Workshop</label>
+		                    <label for="workshop">Location</label>
 		                    <div class="form-group">
 			                    <div class="form-line">
 			                        <select class="form-control show-tick" id="workshop" name="workshop">
-			                            <option value="">-- Please select workshop --</option>
+			                            <option value="">-- Please select location --</option>
 			                            @foreach($workshops as $list)
 			                            <option value="{{$list->id}}" @if($list->id == $userdetails->workshop_id) selected="selected" @endif >{{$list->name}}</option>
 			                            @endforeach
@@ -213,7 +213,7 @@ function paymentMode(mode){
 		                    <label for="name">Payee</label>
 		                    <div class="form-group">
 		                        <div class="form-line">
-		                            <select class="form-control show-tick" id="name" name="name">
+		                            <select class="form-control show-tick" id="name" name="name" required>
 			                            <option value="{{$deposit->to_user}}" @if($deposit->to_user == $userdetails->id) selected="selected" @endif >{{ $userdetails->name }}</option>
 			                        </select>
 		                        </div>

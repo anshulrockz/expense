@@ -12,13 +12,13 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Sub Expense Category
+                    Supply Category
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li class="active">Sub Expense Category</li>
+                    <li class="active">Supply Category</li>
                 </ol>
             </div>
         </div>
@@ -32,18 +32,16 @@
                 <h2>
                     All
                 </h2>
-                <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('/subexpenses/create')}}">Create New</a>
+                <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('expense-categories/supply-category/create')}}">Create New</a>
             </div>
             <div class="body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                         <thead>
                             <tr>
-                                <th>Department</th>
-                                <th>Expense Category</th>
-                                <th>Name</th>
+                                <th>Supply Type</th>
+                                <th>Supply Category</th>
                                 <th>Description</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -60,19 +58,13 @@
                         <tbody>
                         	@foreach( $sub_expense as $key=>$list )
                             <tr>
-                                <td>{{$list->department_name}}</td>
                                 <td>{{$list->expense_categories_name}}</td>
                                 <td>{{$list->name}}</td>
                                 <td>{{$list->description}}</td>
                                 <td>
-                                	@if($list->status==1){{"Active"}}
-                                	@else {{"Inactive"}}
-                                	@endif
-                                </td>
-                                <td>
-                                    <!-- <a href="{{ url('/subexpenses/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
-                                    <a href="{{ url('/subexpenses/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
-                                    <form style="display: inline;" method="post" action="{{route('subexpenses.destroy',$list->id)}}">
+                                    <!-- <a href="{{ url('/supply-category/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
+                                    <a href="{{ url('expense-categories/supply-category/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
+                                    <form style="display: inline;" method="post" action="{{route('supply-category.destroy',$list->id)}}">
 				                        {{ csrf_field() }}
 				                        {{ method_field('DELETE') }}
 				                        <button onclick="return confirm('Are you sure you want to Delete?');" type="submit" class="btn btn-sm btn-danger"><i class="material-icons">delete</i></button>

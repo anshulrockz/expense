@@ -9,13 +9,13 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Sub Sub Expense Category
+                    Expense Category
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li class="active">Sub Sub Expense Category</li>
+                    <li class="active">Expense Category</li>
                 </ol>
             </div>
         </div>
@@ -29,41 +29,41 @@
                 <h2>
                     All
                 </h2>
-                <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('/subsubexpenses/create')}}">Create New</a>
+                <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('expense-categories/expense-category/create')}}">Create New</a>
             </div>
             <div class="body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Supply Type</th>
+                                <th>Supply Category</th>
+                                <th>Expense Category</th>
                                 <th>Description</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                        </thead>
+                        </thead><!-- 
                         <tfoot>
                             <tr>
                                 <th>Name</th>
+                                <th>Name</th>
+                                <th>Name</th>
                                 <th>Description</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                         <tbody>
                         	@foreach( $sub_sub_expense as $key=>$list )
                             <tr>
+                                <td>{{$list->expense_categories_name}}</td>
+                                <td>{{$list->sub_expenses_name}}</td>
                                 <td>{{$list->name}}</td>
                                 <td>{{$list->description}}</td>
                                 <td>
-                                	@if($list->status==1){{"Active"}}
-                                	@else {{"Inactive"}}
-                                	@endif
-                                </td>
-                                <td>
-                                    <!-- <a href="{{ url('/subsubexpenses/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
-                                    <a href="{{ url('/subsubexpenses/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
-                                    <form style="display: inline;" method="post" action="{{route('subsubexpenses.destroy',$list->id)}}">
+                                    <!-- <a href="{{ url('/expense-category/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
+                                    <a href="{{ url('expense-categories/expense-category/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
+                                    <form style="display: inline;" method="post" action="{{route('expense-category.destroy',$list->id)}}">
 				                        {{ csrf_field() }}
 				                        {{ method_field('DELETE') }}
 				                        <button onclick="return confirm('Are you sure you want to Delete?');" type="submit" class="btn btn-sm btn-danger"><i class="material-icons">delete</i></button>

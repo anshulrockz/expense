@@ -17,7 +17,7 @@ class SubSubExpenseController extends Controller
      */
     public function index()
     {
-    	$sub_sub_expense = SubSubExpense::all();
+    	$sub_sub_expense = SubSubExpense::expense_categoriesJoin();
         return view('sub_sub_expense_category.index')->with('sub_sub_expense', $sub_sub_expense);
     }
 
@@ -143,7 +143,7 @@ class SubSubExpenseController extends Controller
     public function id_ajax(Request $request)
     {
 		$expense_category = $request->id;
-		$sub_expense = SubExpense::where('expense_category',$expense_category)->get();//->pluck('name','id');
+		$sub_expense = SubSubExpense::where('sub_expenses',$expense_category)->get();//->pluck('name','id');
 		print_r(json_encode($sub_expense));
 	}
 }

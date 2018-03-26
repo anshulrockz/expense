@@ -10,13 +10,13 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Expense Category
+                    Supply Type
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li><a href="{{ url('/expense-categories') }}">Expense Category</a></li>
+                    <li><a href="{{ url('expense-categories/supply-type') }}">Supply Type</a></li>
                     <li class="active">Create</li>
                 </ol>
             </div>
@@ -39,7 +39,7 @@
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{route('expense-categories.store')}}">
+                <form method="post" action="{{route('supply-type.store')}}">
                 	{{ csrf_field() }}
                     <label for="name">Name</label>
                     <div class="form-group">

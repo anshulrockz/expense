@@ -88,7 +88,7 @@
                                 <th>Model/Item</th>
                                 <th>Amount</th>
                                 <th>Voucher Date</th>
-                                <th>Expiry Date</th>
+                                <th>Warranty Date</th>
                                 <th>Expiry days</th>
                             </tr>
                         </tfoot>

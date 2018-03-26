@@ -93,11 +93,11 @@ $(function(){
 	                    	</div>
 	                    </div>
 	                    <div class="col-sm-6">
-		                    <label for="workshop">Workshop</label>
+		                    <label for="workshop">Location</label>
 		                    <div class="form-group">
 			                    <div class="form-line">
 			                        <select class="form-control show-tick" id="workshop" name="workshop">
-			                            <option value="">-- Please select workshop --</option>
+			                            <option value="">-- Please select location --</option>
 			                            
 			                        </select>
 		                    	</div>

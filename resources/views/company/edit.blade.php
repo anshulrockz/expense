@@ -1,6 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
+<script>
+$( document ).ready(function() {
+    $("#form input").prop("disabled", true);
+    $("#form select").prop("disabled", true);
+    $("#form textarea").prop("disabled", true);
+    $("#form-save").prop("disabled", true);
+});
+
+$(function() {
+    $("#form-edit").click(function() {
+     	$("#form input").prop("disabled", false);
+     	$("#form select").prop("disabled", false);
+    	$("#form textarea").prop("disabled", false);
+    	$("#form-save").prop("disabled", false);
+    });
+});
+</script>
+
 <!-- JQuery DataTable Css -->
 <link href="{{ asset('bsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
     
@@ -39,7 +58,7 @@
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{route('companies.update',$company->id)}}">
+                <form id="form" method="post" action="{{route('companies.update',$company->id)}}">
                 	{{ csrf_field() }}
 	                {{ method_field('PUT') }}
 	                <div class="row clearfix">
@@ -100,7 +119,12 @@
 		                    </div>
 		                </div>
 		            </div>
-	                    <button type="submit" class="btn btn-primary m-t-15 waves-effect">Save</button>
+	                <div class="row clearfix">
+	                	<div class="col-sm-6">
+	                		<button type="submit" id="form-save" class="btn btn-primary waves-effect">Save</button>
+	                		<button type="button" id="form-edit" class="btn btn-primary waves-effect">Edit</button>
+	                	</div>
+	                </div>
                 </form>
             </div>
         </div>

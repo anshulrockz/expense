@@ -111,7 +111,7 @@ $(function(){
             $("table tbody").append(markup);
 
             
-            $("input[class *= 'cost1']").each(function(){
+            $("input[class *= 'abt']").each(function(){
 	        	total_cost += +$(this).val();
 	    	}); 
             $("input[class *= 'sgst']").each(function(){
@@ -155,7 +155,7 @@ $(function(){
         	var total_igst = 0; 
 			var total_amount = 0;
 
-			$("input[class *= 'cost1']").each(function(){
+			$("input[class *= 'abt']").each(function(){
 	        	total_cost += +$(this).val();
 	    	}); 
             $("input[class *= 'sgst']").each(function(){
@@ -336,6 +336,8 @@ $(document).ready(function() {
 		                                <th >Description</th>
 		                                <th >HSN/SAC</th>
 		                                <th >Base Value</th>
+		                                <th >Quantity</th>
+		                                <th >Amount</th>
 		                                <th >SGST</th>
 		                                <th >CGST</th>
 		                                <th >IGST</th>
@@ -349,7 +351,7 @@ $(document).ready(function() {
 		                        	@foreach( $expense_details as $key=>$expense_details)
 		                        	@php 
 		                        		
-		                        		$total_cost += $expense_details->cost;
+		                        		$total_cost += $expense_details->cost*$expense_details->quantity;
 		                        		$total_sgst += $expense_details->sgst;
 		                        		$total_cgst += $expense_details->cgst;
 		                        		$total_igst += $expense_details->igst;
@@ -384,6 +386,14 @@ $(document).ready(function() {
 		                            		{{$expense_details->cost}}
 		                            		<input name="cost[]" class="form-control cost1" type="hidden" value="{{$expense_details->cost}}"  />
 		                            	</td>
+		                            	<td class="quantity_td">
+		                            		{{$expense_details->quantity}}
+		                            		<input name="quantity[]" class="form-control quantity" type="hidden" value="{{$expense_details->quantity}}"  />
+		                            	</td>
+		                            	<td class="abt_td">
+		                            		{{$expense_details->quantity*$expense_details->cost}}
+		                            		<input name="abt[]" class="form-control abt" type="hidden" value="{{$expense_details->quantity*$expense_details->cost}}"  />
+		                            	</td>
 		                            	 <td class="sgst_td">
 		                            	 	{{$expense_details->sgst}}
 		                            	 	<input name="sgst[]" class="form-control sgst" type="hidden" value="{{$expense_details->sgst}}"  />  
@@ -404,7 +414,7 @@ $(document).ready(function() {
 		                        </tbody>
 		                        <tfoot class="final_amount">
 		                            <tr>
-		                            	<th colspan="10" style="text-align: right;">Amount Before Tax</th>
+		                            	<th colspan="12" style="text-align: right;">Amount Before Tax</th>
 		                            	<td class="amount_before_tax_td">
 		                            		{{ $total_cost }}
 		                                	<!-- <div class="form-group form-float">
@@ -418,7 +428,7 @@ $(document).ready(function() {
 		                            </tr>
 		                            @if( $total_sgst > 0 )
 		                            <tr class="sgst_tr">
-		                            	<th colspan="10" style="text-align: right;">SGST Amount</th>
+		                            	<th colspan="12" style="text-align: right;">SGST Amount</th>
 		                            	<td class="sgst_amount_td">
 		                            		{{ $total_sgst }}
 		                                	<!-- <div class="form-group form-float">
@@ -431,7 +441,7 @@ $(document).ready(function() {
 					                	</td>
 		                            </tr>
 		                            <tr class="cgst_tr">
-		                            	<th colspan="10" style="text-align: right;">CGST Amount</th>
+		                            	<th colspan="12" style="text-align: right;">CGST Amount</th>
 		                            	<td class="cgst_amount_td">
 		                            		{{ $total_cgst }}
 		                                	<!-- <div class="form-group form-float">
@@ -445,7 +455,7 @@ $(document).ready(function() {
 		                            </tr>
 		                            @else
 		                            <tr class="igst_tr">
-		                            	<th colspan="10" style="text-align: right;">IGST Amount</th>
+		                            	<th colspan="12" style="text-align: right;">IGST Amount</th>
 		                            	<td class="igst_amount_td">
 		                            		{{ $total_igst }}
 		                                	<!-- <div class="form-group form-float">
@@ -459,7 +469,7 @@ $(document).ready(function() {
 		                            </tr>
 		                            @endif
 		                            <tr class="">
-		                            	<th colspan="10" style="text-align: right;">Total Amount</th>
+		                            	<th colspan="12" style="text-align: right;">Total Amount</th>
 		                            	<td class="total_amount_td">
 		                            		{{ $total_cost + $total_sgst + $total_cgst + $total_igst }}
 		                                	<!-- <div class="form-group form-float">

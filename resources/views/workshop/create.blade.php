@@ -1,6 +1,24 @@
  @extends('layouts.app')
 
 @section('content')
+
+<script>
+$(document).ready(function(){
+	$('#other').prop('disabled',true);
+    $('.other').hide();
+    $("#location_type").change(function(){
+    	if($(this).val() == "other"){
+	    	$('#other').prop('disabled',false);
+	    	$('.other').show();
+	    }
+	    else{
+	    	$('#other').prop('disabled',true);
+    		$('.other').hide();
+	    }
+    });
+});
+</script>
+
 <!-- Bootstrap Select Css -->
 <link href="{{ asset('bsb/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
 
@@ -9,13 +27,13 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    Workshop
+                    Location
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li><a href="{{ url('/workshops') }}">Workshop</a></li>
+                    <li><a href="{{ url('/locations') }}">Location</a></li>
                     <li class="active">Create New</li>
                 </ol>
             </div>
@@ -38,10 +56,10 @@
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{ route('workshops.store') }}">
+                <form method="post" action="{{ route('locations.store') }}">
                 	{{ csrf_field() }}
                 	<div class="row clearfix">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-12 col-sm-6 col-xs-6">
 							<label for="company">Company</label>
 		                    <div class="form-group">
 		                        <select class="form-control show-tick" id="company" name="company">
@@ -51,11 +69,13 @@
 		                        </select>
 		                    </div>
 			            </div>
+			        </div>
+			        <div class="row clearfix">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		                    <label for="name">Name</label>
 		                    <div class="form-group">
 		                        <div class="form-line">
-		                            <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="Enter workshop name">
+		                            <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="Enter location name">
 		                        </div>
 		                    </div>
 		                </div>
@@ -63,7 +83,7 @@
 		                    <label for="code">Code</label>
 		                    <div class="form-group">
 		                        <div class="form-line">
-		                            <input type="text" id="code" value="{{ old('code') }}" name="code" class="form-control" placeholder="Enter Workshop code">
+		                            <input type="text" id="code" value="{{ old('code') }}" name="code" class="form-control" placeholder="Enter Location code">
 		                        </div>
 		                    </div>
 		                </div>
@@ -95,7 +115,26 @@
 		                    <label for="gst">GST Number</label>
 		                    <div class="form-group">
 		                        <div class="form-line">
-		                            <input type="text" id="gst" value="{{ old('gst') }}" name="gst" class="form-control" placeholder="Enter address of bank">
+		                            <input type="text" id="gst" value="{{ old('gst') }}" name="gst" class="form-control" placeholder="Enter GST no">
+		                        </div>
+		                    </div>
+		                </div>
+			            <div class="col-lg-6 col-md-12 col-sm-6 col-xs-6">
+							<label for="location_type">Location Type</label>
+		                    <div class="form-group">
+		                        <select class="form-control show-tick" id="location_type" name="location_type">
+		                            <option value="workshop">Workshop</option>
+		                            <option value="home">Home</option>
+		                            <option value="reg_office">Reg. Office</option>
+		                            <option value="other">Other</option>
+		                        </select>
+		                    </div>
+			            </div>
+			            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 other">
+		                    <label for="other">Please Specify</label>
+		                    <div class="form-group">
+		                        <div class="form-line">
+		                            <input type="text" id="other" value="{{ old('other') }}" name="other" class="form-control" placeholder="Enter location type" required>
 		                        </div>
 		                    </div>
 		                </div>

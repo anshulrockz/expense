@@ -58,7 +58,6 @@ class ExpenseController extends Controller
 		// else
   //   	{
 	    	$expense_category = ExpenseCategory::all();
-	    	$purchase_category = PurchaseCategory::all();
 	    	$description = Description::all();
 	    	$tax = Tax::all();
 		// }
@@ -110,6 +109,7 @@ class ExpenseController extends Controller
 		$description = $request->description;
 		$code = $request->code;
 		$cost = $request->cost;
+		$quantity = $request->quantity;
 		$sgst = $request->sgst;
 		$cgst = $request->cgst;
 		$igst = $request->igst;
@@ -123,6 +123,7 @@ class ExpenseController extends Controller
 			$expense_details->description = $description[$i];
 			$expense_details->code = $code[$i];
 			$expense_details->cost = $cost[$i];
+			$expense_details->quantity = $quantity[$i];
 			$expense_details->sgst = $sgst[$i];
 			$expense_details->cgst = $cgst[$i];
 			$expense_details->igst = $igst[$i];
@@ -222,6 +223,7 @@ class ExpenseController extends Controller
 		$description = $request->description;
 		$code = $request->code;
 		$cost = $request->cost;
+		$quantity = $request->quantity;
 		$sgst = $request->sgst;
 		$cgst = $request->cgst;
 		$igst = $request->igst;
@@ -235,6 +237,7 @@ class ExpenseController extends Controller
 			$expense_details->description = $description[$i];
 			$expense_details->code = $code[$i];
 			$expense_details->cost = $cost[$i];
+			$expense_details->quantity = $quantity[$i];
 			$expense_details->sgst = $sgst[$i];
 			$expense_details->cgst = $cgst[$i];
 			$expense_details->igst = $igst[$i];

@@ -4,38 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
 
 class SubSubExpense extends Model
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     
-    public function bookingdetails_ajax($booking_no,$refund_type)
+    public static function expense_categoriesJoin()
 	{
-		if($refund_type == '1'){
-			$booking_details = DB::table('booking')
-			->select('booking.*',DB::raw('SUM(total_amount) as sub_total'),DB::raw('SUM(security_total) as security_total'),DB::raw('SUM(servicetax_total) as service_tax'),DB::raw('SUM(vat_total) as vat'))
+		return DB::table('sub_sub_expenses')
+			->select('sub_sub_expenses.*', 'expense_categories.name as expense_categories_name', 'sub_expenses.name as sub_expenses_name')
 			->where([
-			['booking_no',$booking_no],
-			['booking_status','2'],
-			['booking.status','1']
+			['sub_sub_expenses.deleted_at',null]
 			])
-            ->leftJoin('bookingfacility', 'bookingfacility.booking_id', '=', 'booking.id')
-            ->groupBy('booking.id')
+            ->leftJoin('sub_expenses', 'sub_expenses.id', '=', 'sub_sub_expenses.sub_expenses')
+            ->leftJoin('expense_categories', 'expense_categories.id', '=', 'sub_expenses.expense_category')
             ->get();
-		}
-		else{
-			$booking_details = DB::table('booking')
-			->select('booking.*',DB::raw('SUM(total_amount) as sub_total'),DB::raw('SUM(security_total) as security_total'),DB::raw('SUM(servicetax_total) as service_tax'),DB::raw('SUM(vat_total) as vat'))
-			->where([
-			['booking_no',$booking_no],
-			['booking_status','1'],
-			['booking.status','1']
-			])
-            ->leftJoin('bookingfacility', 'bookingfacility.booking_id', '=', 'booking.id')
-            ->groupBy('booking.id')
-            ->get();
-		}
-		print_r(json_encode( array($booking_details)));
+		
 	}
 }

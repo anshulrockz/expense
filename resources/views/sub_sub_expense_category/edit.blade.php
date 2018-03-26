@@ -9,14 +9,14 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Sub Sub Expense Category
+                    Expense Category
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li><a href="{{ url('/subsubexpenses') }}">Sub Sub Expense Category</a></li>
-                    <li><a href="{{ url('/subsubexpenses/'.$sub_sub_expense->id) }}">{{$sub_sub_expense->name}}</a></li>
+                    <li><a href="{{ url('expense-categories/expense-category') }}">Expense Category</a></li>
+                    <li><a href="{{ url('expense-categories/expense-category/'.$sub_sub_expense->id) }}">{{$sub_sub_expense->name}}</a></li>
                     <li class="active">Edit</li>
                 </ol>
             </div>
@@ -39,7 +39,7 @@
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{route('subsubexpenses.update',$sub_sub_expense->id)}}">
+                <form method="post" action="{{route('expense-category.update',$sub_sub_expense->id)}}">
                 	{{ csrf_field() }}
 	                {{ method_field('PUT') }}
                     <label for="expense_category">Expense Category</label>

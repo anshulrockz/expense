@@ -11,13 +11,13 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Expense Category
+                    Supply Type
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li class="active">Expense Category</li>
+                    <li class="active">Supply Type</li>
                 </ol>
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <h2>
                     All
                 </h2>
-                <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('/expense-categories/create')}}">Create New</a>
+                <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('expense-categories/supply-type/create')}}">Create New</a>
             </div>
             <div class="body">
                 <div class="table-responsive">
@@ -40,7 +40,6 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -59,14 +58,9 @@
                                 <td>{{$list->name}}</td>
                                 <td>{{$list->description}}</td>
                                 <td>
-                                	@if($list->status==1){{"Active"}}
-                                	@else {{"Inactive"}}
-                                	@endif
-                                </td>
-                                <td>
-                                    <!-- <a href="{{ url('/expense-categories/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
-                                    <a href="{{ url('/expense-categories/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
-                                    <form style="display: inline;" method="post" action="{{route('expense-categories.destroy',$list->id)}}">
+                                    <!-- <a href="{{ url('/supply-type/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
+                                    <a href="{{ url('expense-categories/supply-type/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
+                                    <form style="display: inline;" method="post" action="{{route('supply-type.destroy',$list->id)}}">
 				                        {{ csrf_field() }}
 				                        {{ method_field('DELETE') }}
 				                        <button onclick="return confirm('Are you sure you want to Delete?');" type="submit" class="btn btn-sm btn-danger"><i class="material-icons">delete</i></button>

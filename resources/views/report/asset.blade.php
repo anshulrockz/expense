@@ -116,7 +116,7 @@
                                 <th>Model/Item</th>
                                 <th>Amount</th>
                                 <th>Voucher Date</th>
-                                <th>Expiry Date</th>
+                                <th>Warranty Date</th>
                             </tr>
                         </thead>
                         <tfoot style="display: table-header-group;">
@@ -129,7 +129,7 @@
                                 <th>Model/Item</th>
                                 <th>Amount</th>
                                 <th>Voucher Date</th>
-                                <th>Expiry Date</th>
+                                <th>Warranty Date</th>
                             </tr>
                         </tfoot>
                         <tbody class="print-body">

@@ -15,8 +15,8 @@
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li><a href="{{ url('/subexpenses') }}">Sub Expense Category</a></li>
-                    <li><a href="{{ url('/subexpenses/'.$sub_expense->id) }}">{{$sub_expense->name}}</a></li>
+                    <li><a href="{{ url('/supply-category') }}">Sub Expense Category</a></li>
+                    <li><a href="{{ url('expense-categories/supply-category/'.$sub_expense->id) }}">{{$sub_expense->name}}</a></li>
                     <li class="active">Edit</li>
                 </ol>
             </div>
@@ -39,7 +39,7 @@
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{route('subexpenses.update',$sub_expense->id)}}">
+                <form method="post" action="{{route('supply-category.update',$sub_expense->id)}}">
                 	{{ csrf_field() }}
 	                {{ method_field('PUT') }}
                     <label for="expense_category">Expense Category</label>

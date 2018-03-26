@@ -104,8 +104,9 @@ class WorkshopController extends Controller
      */
     public function edit($id)
     {
+    	$company = Company::all();
         $workshop = Workshop::find($id);
-        return view('workshop.edit')->with('workshop',$workshop);
+        return view('workshop.edit')->with( array('workshop' => $workshop,'company' => $company ));
     }
 
     /**

@@ -12,13 +12,13 @@
         <div class="card">
         	<div class="header">
 	            <h2>
-	                Workshops
+	                Locations
 	            </h2>
 	        </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li class="active">Workshop</li>
+                    <li class="active">Location</li>
                 </ol>
             </div>
         </div>
@@ -38,21 +38,20 @@
                 <h2>
                     All
                 </h2>
-                <a class="btn btn-primary waves-effect header-dropdown m-r--5 " href="{{ url('/workshops/create')}}">
+                <a class="btn btn-primary waves-effect header-dropdown m-r--5 " href="{{ url('/locations/create')}}">
                 	Create New
                 </a>
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                    <table class="table table-bordered table-striped table-hover dataTable">
                         <thead>
                             <tr>
                                 <th>Company</th>
-                                <th>Workshop</th>
+                                <th>Location</th>
                                 <th>Code</th>
                                 <th>Mobile</th>
                                 <th>Address</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -77,14 +76,9 @@
                                 <td>{{$list->mobile}}</td>
                                 <td>{{$list->address}}</td>
                                 <td>
-                                	@if($list->status==1){{"Active"}}
-                                	@else {{"Inactive"}}
-                                	@endif
-                                </td>
-                                <td>
-                                    <!-- <a href="{{ url('/workshops/'.$list->id)}}" class="btn btn-sm btn-success"> <i class="material-icons">pageview</i> </a> -->
-                                    <a href="{{ url('/workshops/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
-                                    <form style="display: inline;" method="post" action="{{route('workshops.destroy',$list->id)}}">
+                                    <!-- <a href="{{ url('/Locations/'.$list->id)}}" class="btn btn-sm btn-success"> <i class="material-icons">pageview</i> </a> -->
+                                    <a href="{{ url('/locations/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
+                                    <form style="display: inline;" method="post" action="{{route('locations.destroy',$list->id)}}">
 				                        {{ csrf_field() }}
 				                        {{ method_field('DELETE') }}
 				                        <button onclick="return confirm('Are you sure you want to Delete?');" type="submit" class="btn btn-sm btn-danger"><i class="material-icons">delete</i></button>
