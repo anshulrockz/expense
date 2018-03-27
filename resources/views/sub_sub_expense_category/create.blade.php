@@ -8,16 +8,17 @@
 <!-- AJAX DD Selecter for Sub Expense Js -->
 <script>
 $(function(){
-$(".search").change(function(){
+$("#expense_category").change(function(){
 	var id = $(this).val();
 	if(id != ''){
+		$('#sub_expenses option').remove();
 		$.ajax({
 			type: "GET",
-			url: "{{url('/subsubexpenses/ajax')}}",
+			url: "{{url('/subexpenses/ajax')}}",
 			data:'id='+id,
 			success: function(data){
 				var data = JSON.parse(data);
-				var selOpts = "";
+				var selOpts = "<option>-- Please select supply category --</option>";
 				if(data.length >0){					
 					console.log(data);
 		            for (i=0;i<data.length;i++)
@@ -34,6 +35,9 @@ $(".search").change(function(){
 			}
 		});
 	}
+	else{
+			$('#sub_expenses option').remove();
+		}
 });
 });
 </script>
@@ -75,27 +79,27 @@ $(".search").change(function(){
                 <form method="post" action="{{route('expense-category.store')}}">
                 	{{ csrf_field() }}
                 	<div class="row clearfix">
-	                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		                    <label for="expense_category">Expense Category</label>
+	                	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		                    <label for="expense_category">Supply Type</label>
 		                    <div class="form-group">
 		                        <select class="form-control show-tick search" id="expense_category" name="expense_category">
-		                            <option value="">-- Please select expense category --</option>
+		                            <option value="">-- Please select supply type --</option>
 		                            @foreach($expense_category as $list)
 		                            <option value="{{$list->id}}">{{$list->name}}</option>
 		                            @endforeach
 		                        </select>
 		                    </div>
 		                </div>
-		            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sub_expenses">
-		                    <label for="sub_expenses">Sub Expense Category</label>
+		            	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 sub_expenses">
+		                    <label for="sub_expenses">Supply Category</label>
 		                    <div class="form-group">
 		                        <select class="form-control show-tick" id="sub_expenses" name="sub_expenses">
-		                            <option value="">-- Please select sub expense category --</option>
+		                            <option value="">-- Please select supply category --</option>
 		                        </select>
 		                    </div>
 		                </div>
 		            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-		                    <label for="name">Name</label>
+		                    <label for="name">Expense Category Name</label>
 		                    <div class="form-group">
 		                        <div class="form-line">
 		                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter expense category name" value="{{ old('name') }}" >

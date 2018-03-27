@@ -10,191 +10,141 @@
 
 <!-- AJAX DD Selecter for Location Js -->
 <script>
+
 $(function(){
-
-	$("#supply_type_main").change(function(){
-		var id = $(this).val();
+	$(".add-row").click(function(){
+		var id = $('#expense_category_main').val(); 
 		if(id != ''){
 			$.ajax({
 				type: "GET",
-				url: "{{url('/subexpenses/ajax')}}",
+				url: "{{url('expense-categories/ajax')}}",
 				data:'id='+id,
 				success: function(data){
-					var data = JSON.parse(data);
-					var selOpts = "";
-					if(data.length >0){				
-						$('#supply_category_main option').remove();	
-						console.log(data);
-			            for (i=0;i<data.length;i++)
-			            {
-			                var id = data[i].id; 
-			                var val = data[i].name;
-			                selOpts += "<option value='"+id+"'>"+val+"</option>";
-			            }
-			            //$('.sub_expense').show();
-			            $('#supply_category_main').append(selOpts);
-					}
-					else{
-						//$('.sub_expense').hide();
-						$('#supply_category_main option').remove();
-					}
-				}
+					var data = JSON.parse(data); 
+					//console.log(data);
+					var supply_type = data.supply_type; 
+	                var category = data.supply_category;
+	                var expense_category = data.name;
+	                var sgst = 0;
+		        	var cgst = 0;
+		        	var igst = 0;
+		        	var total_cost = 0; 
+		        	var total_sgst = 0; 
+		        	var total_cgst = 0; 
+		        	var total_igst = 0; 
+					var total_amount = 0; 
+		        	//var type = $('#supply_type_main option:selected').text();
+		        	//var category = $('#supply_category_main option:selected').text();
+		        	var description = $('#description_main').val();
+		        	var code = $('#code_main').val();
+		        	var cost = $('#cost_main').val();
+		        	var quantity = $('#quantity_main').val();
+		        	var tax = $('#tax_main').val();
+		        	
+		        	if(cost < 0) cost = 0;
+		        	if ($("#radio_1:checked").val() == '1') {
+		                sgst = (cost*quantity*tax)/200;
+						cgst = (cost*quantity*tax)/200;
+
+						$('.sgst_tr').show();
+						$('.cgst_tr').show();
+						$('.igst_tr').hide();
+		            }
+					if ($("#radio_2:checked").val() == '2') {
+		               igst = (cost*quantity*tax)/100;
+
+		               	$('.sgst_tr').hide();
+						$('.cgst_tr').hide();
+						$('.igst_tr').show();
+		            }
+		            abt = parseFloat(cost*quantity);
+				    amount = parseFloat(cost*quantity)+parseFloat(sgst)+parseFloat(cgst)+parseFloat(igst);
+				    amount = parseFloat(amount).toFixed(2);
+
+		        	var delBtn = '<button type="button" class="btn btn-danger btn-xs m-t-15 waves-effect delete-row"><i class="material-icons">remove_circle</i></button>';
+
+		            var markup = '<tr><td>'+supply_type+'<input name="type[]" class="form-control " type="hidden" value="'+supply_type+'"  /></td><td>'+category+'<input name="category[]" class="form-control " type="hidden" value="'+category+'"  /></td><td>'+expense_category+'<input name="expense_category[]" class="form-control " type="hidden" value="'+expense_category+'"  /></td><td>'+description+'<input name="description[]" class="form-control " type="hidden" value="'+description+'"  /></td><td>'+code+'<input name="code[]" class="form-control " type="hidden" value="'+code+'"  /></td><td class="cost_td">'+cost+'<input name="cost[]" class="form-control cost1" type="hidden" value="'+cost+'"  /></td><td class="quantity_td">'+quantity+'<input name="quantity[]" class="form-control quantity" type="hidden" value="'+quantity+'"  /></td><td class="abt_td">'+abt+'<input name="abt[]" class="form-control abt" type="hidden" value="'+abt+'"  /></td> <td class="sgst_td"> '+sgst+'<input name="sgst[]" class="form-control sgst" type="hidden" value="'+sgst+'"  />  </td><td class="tax_amount_td">'+cgst+'<input name="cgst[]" class="form-control cgst" type="hidden" value="'+cgst+'" />  </td><td class="tax_amount_td">'+igst+' <input name="igst[]" class="form-control igst" type="hidden" value="'+igst+'"  />  </td> <td class="amount_td"> '+amount+' <input name="amount[]" class="form-control unamount1" type="hidden" value="'+amount+'" /> </td><td>'+delBtn+'</td></tr> ';
+									  
+		            $("table tbody").append(markup);
+
+		            
+		            $("input[class *= 'abt']").each(function(){
+			        	total_cost += +$(this).val();
+			    	}); 
+		            $("input[class *= 'sgst']").each(function(){
+			        	total_sgst += +$(this).val();
+			    	});
+			    	$("input[class *= 'cgst']").each(function(){
+			        	total_cgst += +$(this).val();
+			    	});
+			    	$("input[class *= 'igst']").each(function(){
+			        	total_igst += +$(this).val();
+			    	});
+			    	$("input[class *= 'unamount']").each(function(){
+			    		total_amount += +$(this).val(); 
+			    	});
+
+			    	$('input#amount_before_tax').val(parseFloat(total_cost).toFixed(2));
+			    	$('input#sgst_amount').val(parseFloat(total_sgst).toFixed(2));
+			    	$('input#cgst_amount').val(parseFloat(total_cgst).toFixed(2));
+			    	$('input#igst_amount').val(parseFloat(total_igst).toFixed(2));
+					$('input#total_amount').val(parseFloat(total_amount).toFixed(2));
+
+					$('.amount_before_tax_td').html(parseFloat(total_cost).toFixed(2));
+			    	$('.sgst_amount_td').html(parseFloat(total_sgst).toFixed(2));
+			    	$('.cgst_amount_td').html(parseFloat(total_cgst).toFixed(2));
+			    	$('.igst_amount_td').html(parseFloat(total_igst).toFixed(2));
+					$('.total_amount_td').html(parseFloat(total_amount).toFixed(2));
+
+					$('#radio_1').prop('disabled',true);
+		        	$('#radio_2').prop('disabled',true);
+		        	$('.dataTable').show();
+
+	        	}
 			});
 		}
-	});
+    });
 
-	$("#supply_category_main").change(function(){
-		var id = $(this).val();
-		if(id != ''){
-			$.ajax({
-				type: "GET",
-				url: "{{url('/subsubexpenses/ajax')}}",
-				data:'id='+id,
-				success: function(data){
-					var data = JSON.parse(data);
-					var selOpts = "";
-					if(data.length >0){				
-						$('#expense_category_main option').remove();	
-						console.log(data);
-			            for (i=0;i<data.length;i++)
-			            {
-			                var id = data[i].id; 
-			                var val = data[i].name;
-			                selOpts += "<option value='"+id+"'>"+val+"</option>";
-			            }
-			            //$('.sub_expense').show();
-			            $('#expense_category_main').append(selOpts);
-					}
-					else{
-						//$('.sub_expense').hide();
-						$('#expense_category_main option').remove();
-					}
-				}
-			});
-		}
-	});
-});
+    $('.data-field').on('click', '.delete-row', function(e){
+		e.preventDefault();
+		
+		$(this).closest("tr").remove();
 
-	$(document).ready(function(){
-        $(".add-row").click(function(){
+		var total_cost = 0; 
+    	var total_sgst = 0; 
+    	var total_cgst = 0; 
+    	var total_igst = 0; 
+		var total_amount = 0;
 
-        	var sgst = 0;
-        	var cgst = 0;
-        	var igst = 0;
-        	var total_cost = 0; 
-        	var total_sgst = 0; 
-        	var total_cgst = 0; 
-        	var total_igst = 0; 
-			var total_amount = 0; 
-        	var type = $('#supply_type_main').val();
-        	var category = $('#supply_category_main').val();
-        	var expense_category = $('#expense_category_main').val();
-        	var description = $('#description_main').val();
-        	var code = $('#code_main').val();
-        	var cost = $('#cost_main').val();
-        	var quantity = $('#quantity_main').val();
-        	var tax = $('#tax_main').val();
-        	
-        	if(cost < 0) cost = 0;
-        	if ($("#radio_1:checked").val() == '1') {
-                sgst = (cost*quantity*tax)/200;
-				cgst = (cost*quantity*tax)/200;
+		$("input[class *= 'abt']").each(function(){
+        	total_cost += +$(this).val();
+    	}); 
+        $("input[class *= 'sgst']").each(function(){
+        	total_sgst += +$(this).val();
+    	});
+    	$("input[class *= 'cgst']").each(function(){
+        	total_cgst += +$(this).val();
+    	});
+    	$("input[class *= 'igst']").each(function(){
+        	total_igst += +$(this).val();
+    	});
+    	$("input[class *= 'unamount']").each(function(){
+    		total_amount += +$(this).val(); 
+    	});
 
-				$('.sgst_tr').show();
-				$('.cgst_tr').show();
-				$('.igst_tr').hide();
-            }
-			if ($("#radio_2:checked").val() == '2') {
-               igst = (cost*quantity*tax)/100;
+		$('input#amount_before_tax').val(parseFloat(total_cost).toFixed(2));
+    	$('input#sgst_amount').val(parseFloat(total_sgst).toFixed(2));
+    	$('input#cgst_amount').val(parseFloat(total_cgst).toFixed(2));
+    	$('input#igst_amount').val(parseFloat(total_igst).toFixed(2));
+		$('input#total_amount').val(parseFloat(total_amount).toFixed(2));
 
-               	$('.sgst_tr').hide();
-				$('.cgst_tr').hide();
-				$('.igst_tr').show();
-            }
-            abt = parseFloat(cost*quantity);
-		    amount = parseFloat(cost*quantity)+parseFloat(sgst)+parseFloat(cgst)+parseFloat(igst);
-		    amount = parseFloat(amount).toFixed(2);
-
-        	var delBtn = '<button type="button" class="btn btn-danger btn-xs m-t-15 waves-effect delete-row"><i class="material-icons">remove_circle</i></button>';
-
-            var markup = '<tr><td>'+type+'<input name="type[]" class="form-control " type="hidden" value="'+type+'"  /></td><td>'+category+'<input name="category[]" class="form-control " type="hidden" value="'+category+'"  /></td><td>'+expense_category+'<input name="expense_category[]" class="form-control " type="hidden" value="'+expense_category+'"  /></td><td>'+description+'<input name="description[]" class="form-control " type="hidden" value="'+description+'"  /></td><td>'+code+'<input name="code[]" class="form-control " type="hidden" value="'+code+'"  /></td><td class="cost_td">'+cost+'<input name="cost[]" class="form-control cost1" type="hidden" value="'+cost+'"  /></td><td class="quantity_td">'+quantity+'<input name="quantity[]" class="form-control quantity" type="hidden" value="'+quantity+'"  /></td><td class="abt_td">'+abt+'<input name="abt[]" class="form-control abt" type="hidden" value="'+abt+'"  /></td> <td class="sgst_td"> '+sgst+'<input name="sgst[]" class="form-control sgst" type="hidden" value="'+sgst+'"  />  </td><td class="tax_amount_td">'+cgst+'<input name="cgst[]" class="form-control cgst" type="hidden" value="'+cgst+'" />  </td><td class="tax_amount_td">'+igst+' <input name="igst[]" class="form-control igst" type="hidden" value="'+igst+'"  />  </td> <td class="amount_td"> '+amount+' <input name="amount[]" class="form-control unamount1" type="hidden" value="'+amount+'" /> </td><td>'+delBtn+'</td></tr> ';
-							  
-            $("table tbody").append(markup);
-
-            
-            $("input[class *= 'abt']").each(function(){
-	        	total_cost += +$(this).val();
-	    	}); 
-            $("input[class *= 'sgst']").each(function(){
-	        	total_sgst += +$(this).val();
-	    	});
-	    	$("input[class *= 'cgst']").each(function(){
-	        	total_cgst += +$(this).val();
-	    	});
-	    	$("input[class *= 'igst']").each(function(){
-	        	total_igst += +$(this).val();
-	    	});
-	    	$("input[class *= 'unamount']").each(function(){
-	    		total_amount += +$(this).val(); 
-	    	});
-
-	    	$('input#amount_before_tax').val(parseFloat(total_cost).toFixed(2));
-	    	$('input#sgst_amount').val(parseFloat(total_sgst).toFixed(2));
-	    	$('input#cgst_amount').val(parseFloat(total_cgst).toFixed(2));
-	    	$('input#igst_amount').val(parseFloat(total_igst).toFixed(2));
-			$('input#total_amount').val(parseFloat(total_amount).toFixed(2));
-
-			$('.amount_before_tax_td').html(parseFloat(total_cost).toFixed(2));
-	    	$('.sgst_amount_td').html(parseFloat(total_sgst).toFixed(2));
-	    	$('.cgst_amount_td').html(parseFloat(total_cgst).toFixed(2));
-	    	$('.igst_amount_td').html(parseFloat(total_igst).toFixed(2));
-			$('.total_amount_td').html(parseFloat(total_amount).toFixed(2));
-
-			$('#radio_1').prop('disabled',true);
-        	$('#radio_2').prop('disabled',true);
-        	$('.dataTable').show();
-        });
-
-        $('.data-field').on('click', '.delete-row', function(e){
-			e.preventDefault();
-			
-			$(this).closest("tr").remove();
-
-			var total_cost = 0; 
-        	var total_sgst = 0; 
-        	var total_cgst = 0; 
-        	var total_igst = 0; 
-			var total_amount = 0;
-
-			$("input[class *= 'abt']").each(function(){
-	        	total_cost += +$(this).val();
-	    	}); 
-            $("input[class *= 'sgst']").each(function(){
-	        	total_sgst += +$(this).val();
-	    	});
-	    	$("input[class *= 'cgst']").each(function(){
-	        	total_cgst += +$(this).val();
-	    	});
-	    	$("input[class *= 'igst']").each(function(){
-	        	total_igst += +$(this).val();
-	    	});
-	    	$("input[class *= 'unamount']").each(function(){
-	    		total_amount += +$(this).val(); 
-	    	});
-
-			$('input#amount_before_tax').val(parseFloat(total_cost).toFixed(2));
-	    	$('input#sgst_amount').val(parseFloat(total_sgst).toFixed(2));
-	    	$('input#cgst_amount').val(parseFloat(total_cgst).toFixed(2));
-	    	$('input#igst_amount').val(parseFloat(total_igst).toFixed(2));
-			$('input#total_amount').val(parseFloat(total_amount).toFixed(2));
-
-	    	$('.amount_before_tax_td').html(parseFloat(total_cost).toFixed(2));
-	    	$('.sgst_amount_td').html(parseFloat(total_sgst).toFixed(2));
-	    	$('.cgst_amount_td').html(parseFloat(total_cgst).toFixed(2));
-	    	$('.igst_amount_td').html(parseFloat(total_igst).toFixed(2));
-			$('.total_amount_td').html(parseFloat(total_amount).toFixed(2));
-		}); 
-    });    
+    	$('.amount_before_tax_td').html(parseFloat(total_cost).toFixed(2));
+    	$('.sgst_amount_td').html(parseFloat(total_sgst).toFixed(2));
+    	$('.cgst_amount_td').html(parseFloat(total_cgst).toFixed(2));
+    	$('.igst_amount_td').html(parseFloat(total_igst).toFixed(2));
+		$('.total_amount_td').html(parseFloat(total_amount).toFixed(2));
+	}); 
+});    
 
 
 
@@ -307,7 +257,7 @@ $(document).ready(function() {
 		                    <label for="mode">Mode Of Payment</label>
 		                    <div class="form-group">
 		                        <div class="form-line">
-		                            <select class="form-control show-tick" id="mode" name="mode" onchange="paymentMode(this.value);">
+		                            <select class="form-control show-tick" id="mode" name="mode">
 			                            <option value="Cash">Cash</option>
 			                            <option value="Credit">Credit</option>
 			                        </select>
@@ -340,8 +290,6 @@ $(document).ready(function() {
 			                <table class="table table-bordered table-striped table-hover" >
 		                        <thead>
 		                            <tr>
-		                                <th >Supply Type</th>
-		                                <th >Supply Cat.</th>
 		                                <th >Exp Cat.</th>
 		                                <th >Description</th>
 		                                <th >HSN/SAC</th>
@@ -351,42 +299,45 @@ $(document).ready(function() {
 		                                <th >Action</th>
 		                            </tr>
 		                        	<tr>
-		                                <td>
+		                                <!-- <td>
 						                    <div class="form-group ">
-							                    <div class="form-line ">
+							                    <div class="form-line focused">
 							                        <select class="form-control" id="supply_type_main">
 							                        	<option value="" >select</option>
 							                        	@foreach($expense_category as $list)
 							                            <option value="{{$list->id}}">{{$list->name}}</option>
 							                            @endforeach
-							                            <!-- <option value="Service" >Service</option>
-							                            <option value="Material" >Material</option> -->
+							                            <option value="Service" >Service</option>
+							                            <option value="Material" >Material</option> 
 							                        </select>
 						                    	</div>
 					                    	</div>
 		                                </td>
 		                                <td>
 						                    <div class="form-group ">
-							                    <div class="form-line ">
+							                    <div class="form-line focused">
 							                        <select class="form-control" id="supply_category_main">
-							                            <option value="Workshop" >Workshop</option>
-							                            <option value="Non-Workshop" >Non-Workshop</option>
+							                            <option >select</option>
+							                            <option value="Non-Workshop" >Non-Workshop</option> 
 							                        </select>
 						                    	</div>
 					                    	</div>
-		                                </td>
+		                                </td> -->
 		                                <td>
 						                    <div class="form-group">
-							                    <div class="form-line ">
+							                    <div class="form-line focused">
 							                        <select class="form-control show-tick" id="expense_category_main">
-							                           
+							                           <option value="" >select</option>
+							                        	@foreach($expense_category as $list)
+							                            <option value="{{$list->id}}">{{$list->name}}</option>
+							                            @endforeach
 							                        </select>
 						                    	</div>
 					                    	</div>
 		                                </td>
 		                                <td>
 						                    <div class="form-group ">
-							                    <div class="form-line ">
+							                    <div class="form-line focused">
 							                        <select class="form-control show-tick" id="description_main" >
 							                            @foreach($description as $list)
 							                            <option value="{{$list->name}}">{{$list->name}}</option>

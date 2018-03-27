@@ -2,7 +2,7 @@
 
 @section('content')
 
-<script>
+<!-- <script>
 $( document ).ready(function() {
     $("#form input").prop("disabled", true);
     $("#form select").prop("disabled", true);
@@ -19,7 +19,7 @@ $(function() {
     });
 });
 
-</script>
+</script> -->
 
 <!-- Bootstrap Select Css -->
 <link href="{{ asset('bsb/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
@@ -65,7 +65,7 @@ $(function() {
                         <select class="form-control show-tick" id="company" name="company">
                             <option value="">-- Please select company --</option>
                             @foreach($company as $list)
-                            <option value="{{$list->id}}">{{$list->name}}</option>
+                            <option value="{{$list->id}}" @if($workshop->company_id == $list->id) selected @endif >{{$list->name}}</option>
                             @endforeach
                         </select>
                     </div>

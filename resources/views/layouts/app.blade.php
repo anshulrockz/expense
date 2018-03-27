@@ -385,10 +385,10 @@
                                 </a>
                             </li>
                         	<li class="{{ Request::is('expense-categories*') ? 'active' : '' }}" >
-                                <a class="menu-toggle" >
+                                <a href="{{ url('expense-categories') }} ">
                                     <span>Expense Categories</span>
                                 </a>
-                                <ul class="ml-menu">
+                                <!-- <ul class="ml-menu">
                                     <li class="{{ Request::is('expense-categories/supply-type*') ? 'active' : '' }}" >
                                         <a href="{{ url('expense-categories/supply-type') }} ">
                                             <span>Supply Type</span>
@@ -404,7 +404,7 @@
                                             <span>Expense Category</span>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <!-- <li class="{{ Request::is('purchase-categories*') ? 'active' : '' }}" >
                                 <a class="menu-toggle">

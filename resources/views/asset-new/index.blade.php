@@ -12,13 +12,13 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Asset Old
+                    Asset New
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li class="active">Asset Old</li>
+                    <li class="active">Asset New</li>
                 </ol>
             </div>
         </div>

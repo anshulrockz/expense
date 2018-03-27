@@ -11,13 +11,13 @@
         <div class="card">
         	<div class="header">
                 <h2>
-                    Supply Type
+                    Expense Category
                 </h2>
             </div>
             <div class="body">
                 <ol class="breadcrumb breadcrumb-bg-pink">
                     <li><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li class="active">Supply Type</li>
+                    <li class="active">Expense Category</li>
                 </ol>
             </div>
         </div>
@@ -31,14 +31,16 @@
                 <h2>
                     All
                 </h2>
-                <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('expense-categories/supply-type/create')}}">Create New</a>
+                <a class="btn btn-primary waves-effect header-dropdown m-r--5" href="{{ url('expense-categories/create')}}">Create New</a>
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                    <table class="table table-bordered table-striped table-hover dataTable">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Supply Type</th>
+                                <th>Supply Category</th>
+                                <th>Expense Category</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>
@@ -55,12 +57,14 @@
                         <tbody>
                         	@foreach( $expense_category as $key=>$list )
                             <tr>
+                                <td>{{$list->supply_type}}</td>
+                                <td>{{$list->supply_category}}</td>
                                 <td>{{$list->name}}</td>
                                 <td>{{$list->description}}</td>
                                 <td>
                                     <!-- <a href="{{ url('/supply-type/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
-                                    <a href="{{ url('expense-categories/supply-type/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
-                                    <form style="display: inline;" method="post" action="{{route('supply-type.destroy',$list->id)}}">
+                                    <a href="{{ url('expense-categories/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>
+                                    <form style="display: inline;" method="post" action="{{route('expense-categories.destroy',$list->id)}}">
 				                        {{ csrf_field() }}
 				                        {{ method_field('DELETE') }}
 				                        <button onclick="return confirm('Are you sure you want to Delete?');" type="submit" class="btn btn-sm btn-danger"><i class="material-icons">delete</i></button>
@@ -85,7 +89,7 @@
 
 <script>
 $(document).ready(function() {
-    $('.datatable').DataTable( {
+    $('.dataTable').DataTable( {
         "order": [[ 1, "desc" ]],
         fixedHeader: {
             header: true,

@@ -86,8 +86,9 @@ class SubSubExpenseController extends Controller
     public function edit($id)
     {
         $expense_category = ExpenseCategory::all();
+        $sub_expense = SubExpense::all();
         $sub_sub_expense = SubSubExpense::find($id);
-        return view('sub_sub_expense_category.edit')->with(array('sub_sub_expense' => $sub_sub_expense, 'expense_category' => $expense_category));
+        return view('sub_sub_expense_category.edit')->with(array('sub_sub_expense' => $sub_sub_expense, 'sub_expense' => $sub_expense, 'expense_category' => $expense_category));
     }
 
     /**

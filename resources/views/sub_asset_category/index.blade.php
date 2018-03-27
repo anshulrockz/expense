@@ -42,7 +42,7 @@
                                 <th>Asset Category</th>
                                 <th>Sub Category</th>
                                 <th>Description</th>
-                                <th>Status</th>
+                                <!-- <th>Status</th> -->
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -61,11 +61,11 @@
                                 <td>{{$list->asset_categories_name}}</td>
                                 <td>{{$list->name}}</td>
                                 <td>{{$list->description}}</td>
-                                <td>
+                                <!-- <td>
                                 	@if($list->status==1){{"Active"}}
                                 	@else {{"Inactive"}}
                                 	@endif
-                                </td>
+                                </td> -->
                                 <td>
                                     <!-- <a href="{{ url('/subassets/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
                                     <a href="{{ url('/subassets/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>

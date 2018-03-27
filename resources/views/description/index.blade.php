@@ -40,7 +40,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Status</th>
+                                <!-- <th>Status</th> -->
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -56,11 +56,11 @@
                         	@foreach( $description as $key=>$list)
                             <tr>
                                 <td>{{$list->name}}</td>
-                                <td>
+                                <!-- <td>
                                 	@if($list->status==1){{"Active"}}
                                 	@else {{"Inactive"}}
                                 	@endif
-                                </td>
+                                </td> -->
                                 <td>
                                     <!-- <a href="{{ url('/descriptions/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
                                     <a href="{{ url('/descriptions/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>

@@ -63,10 +63,10 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 		Route::get('/workshops/ajax','WorkshopController@id_ajax');
 	
 		//Sub Expense Category
-		Route::get('/subexpenses/ajax','SubExpenseController@id_ajax');
+		Route::get('/expense-categories/ajax','ExpenseCategoryController@id_ajax');
 
 		//Sub Sub Expense Category
-		Route::get('/subsubexpenses/ajax','SubSubExpenseController@id_ajax');
+		//Route::get('/subsubexpenses/ajax','SubSubExpenseController@id_ajax');
 		
 		//Sub Asset Category
 		Route::get('/subassets/ajax','SubAssetController@id_ajax');
@@ -95,14 +95,14 @@ Route::group(['middleware' => 'CheckAdmin'], function() {
 		//Employee(user) Type
 		Route::resource('/employee-types', 'EmployeeTypeController');
 
-		//supply type
-		Route::resource('expense-categories/supply-type', 'ExpenseCategoryController');
+		//Expense Category
+		Route::resource('expense-categories', 'ExpenseCategoryController');
 
 		//Sub Expense Category
-		Route::resource('expense-categories/supply-category', 'SubExpenseController');
+		//Route::resource('expense-categories/supply-category', 'SubExpenseController');
 
 		//Sub Sub Expense Category - Ajax
-		Route::resource('expense-categories/expense-category', 'SubSubExpenseController');
+		//Route::resource('expense-categories/expense-category', 'SubSubExpenseController');
 		
 		//Purchase Category
 		Route::resource('/purchase-categories', 'PurchaseCategoryController');

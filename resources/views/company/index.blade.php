@@ -49,7 +49,7 @@
                                 <th>Contact Person</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
-                                <th>Status</th>
+                                <!-- <th>Status</th> -->
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -70,11 +70,11 @@
                                 <td>{{$list->contact_person}}</td>
                                 <td>{{$list->mobile}}</td>
                                 <td>{{$list->email}}</td>
-                                <td>
+                                <!-- <td>
                                 	@if($list->status==1){{"Active"}}
                                 	@else {{"Inactive"}}
                                 	@endif
-                                </td>
+                                </td> -->
                                 <td>
                                     <!-- <a href="{{ url('/companies/'.$list->id)}}" class="btn btn-sm btn-success"> View </a> -->
                                     <a href="{{ url('/companies/'.$list->id.'/edit')}}" class="btn btn-sm btn-info"> <i class="material-icons">edit</i> </a>

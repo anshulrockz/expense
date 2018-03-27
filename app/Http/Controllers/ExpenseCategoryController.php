@@ -49,6 +49,8 @@ class ExpenseCategoryController extends Controller
 		]);
 		
 		$expense_category = new ExpenseCategory;
+        $expense_category->supply_type = $request->expense_category;
+        $expense_category->supply_category = $request->sub_expenses;
 		$expense_category->name = $request->name;
 		$expense_category->description = $request->description;
 		$expense_category->status = 1;
@@ -136,5 +138,11 @@ class ExpenseCategoryController extends Controller
 		else{
 			return redirect()->back()->with('error', 'Something went wrong!');
 		}
+    }
+
+    public function id_ajax(Request $request)
+    {
+        $list = ExpenseCategory::where('id',$request->id)->first();
+        print_r(json_encode($list));
     }
 }

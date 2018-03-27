@@ -70,6 +70,10 @@ class WorkshopController extends Controller
 		$workshop->email = $request->email;
 		$workshop->address = $request->address;
 		$workshop->gst = $request->gst;
+		if ($request->location_type == other) {
+			$workshop->location_type = $request->other;
+		}
+		else $workshop->location_type = $request->location_type;
 		$workshop->user_sys = \Request::ip();
 		$workshop->updated_by = Auth::id();
 		$workshop->created_by = Auth::id();
